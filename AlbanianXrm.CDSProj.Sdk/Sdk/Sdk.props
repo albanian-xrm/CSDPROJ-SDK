@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Microsoft Corporation. All rights reserved.
+  
+  Licensed under the MIT license.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.Build.NoTargets/3.7.56">
+	<PropertyGroup>
+		<PowerAppsTargetsPath Condition="'$(PowerAppsTargetsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
+	</PropertyGroup>
+
+	<Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props')" />
+
+	<PropertyGroup>
+		<TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''">v4.6.2</TargetFrameworkVersion>
+		<!--Remove TargetFramework when this is available in 16.1-->
+		<TargetFramework Condition="'$(TargetFramework)' == ''">net462</TargetFramework>
+		<SolutionRootPath Condition="'$(SolutionRootPath)' == ''">src</SolutionRootPath>
+	</PropertyGroup>
+</Project>

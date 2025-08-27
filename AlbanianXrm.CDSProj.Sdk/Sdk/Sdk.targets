@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Microsoft Corporation. All rights reserved.
+  
+  Licensed under the MIT license.
+-->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" Version="1.*" />
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ExcludeDirectories Include=".vs" />
+		<ExcludeDirectories Include=".gitignore" />
+		<ExcludeDirectories Include="bin\**" />
+		<ExcludeDirectories Include="obj\**" />
+		<ExcludeDirectories Include="*.cdsproj" />
+		<ExcludeDirectories Include="*.cdsproj.user" />
+		<ExcludeDirectories Include="*.sln" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="./**" Exclude="@(ExcludeDirectories)" />
+		<None Remove="@(ExcludeDirectories)" />
+		<None Remove=".vs/**" />
+		<None Remove="$(SolutionRootPath)/**" />
+		<None Include="$(SolutionRootPath)/**">
+			<Link>Dataverse Solution\%(RecursiveDir)/%(FileName)%(Extension)</Link>
+		</None>
+		<None Remove="bin\**" />
+		<Content Include="$(SolutionPackageZipFilePath)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Remove="@(ExcludeDirectories)" />
+		<Content Remove="bin\**" />
+	</ItemGroup>
+
+	<Target Name="CopyPluginPackages" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="CopyCdsSolutionContent">
+		<!-- Copy the built package to the solution folder -->
+		<Copy SourceFiles="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\bin\$(Configuration)\%(LinkedPluginPackage.Identity).$(FileVersion).nupkg"
+			  DestinationFiles="src\pluginpackages\%(LinkedPluginPackage.PublisherPrefix)_%(LinkedPluginPackage.Identity)\package\%(LinkedPluginPackage.PublisherPrefix)_%(LinkedPluginPackage.Identity).nupkg"
+			  OverwriteReadOnlyFiles="true" />
+	</Target>
+
+	<Target Name="PackPlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="CopyPluginPackages">
+		<!-- Build the linked project -->
+		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Pack" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
+		</MSBuild>
+	</Target>
+
+	<Target Name="BuildPlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="PackPlugins">
+		<!-- Build the linked project -->
+		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Build" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
+		</MSBuild>
+	</Target>
+
+	<Target Name="CleanPlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="Clean">
+		<!-- Build the linked project -->
+		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Clean" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
+		</MSBuild>
+	</Target>
+
+	<Target Name="RestorePlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="Restore">
+		<!-- Build the linked project -->
+		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Restore" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
+		</MSBuild>
+
+	</Target>
+
+	<Target Name="SetFileVersion" Condition="'$(FileVersion)' == ''" BeforeTargets="CopyPluginPackages;CleanPlugins;RestorePlugins">
+		<XmlPeek XmlInputPath="$(SolutionRootPath)\Other\Solution.xml" Query="ImportExportXml/SolutionManifest/Version/text()">
+			<Output TaskParameter="Result" ItemName="SolutionVersion" />
+		</XmlPeek>
+		<Message Text="Building Solution v@(SolutionVersion)" Importance="high" />
+		<PropertyGroup>
+			<FileVersion>@(SolutionVersion)</FileVersion>
+		</PropertyGroup>
+	</Target>
+</Project>

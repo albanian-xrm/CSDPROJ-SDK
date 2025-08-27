@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.0">
+	<PropertyGroup>
+		<ProjectGuid>81f4e2f5-d9e9-411b-879f-06c144f84f3c</ProjectGuid>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<LinkedPluginPackage Include="AlbanianXrm.PluginPackage">
+			<ProjectPath>..\</ProjectPath>
+			<PublisherPrefix>albx</PublisherPrefix>
+		</LinkedPluginPackage>
+	</ItemGroup>
+</Project>

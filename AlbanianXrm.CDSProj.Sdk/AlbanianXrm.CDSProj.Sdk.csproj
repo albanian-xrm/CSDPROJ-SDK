@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<Description>Provides targets for dataverse solution projects (.cdsproj).</Description>
+		<PackageTags>MSBuild MSBuildSdk dataverse PowerPlatform</PackageTags>
+		<PackageIcon>Logo.png</PackageIcon>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageType>MSBuildSdk</PackageType>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Sdk/**">
+			<Pack>true</Pack>
+			<PackagePath>Sdk</PackagePath>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Logo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Logo.png">
+	    <Pack>true</Pack>
+		  <PackagePath>\</PackagePath>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Build.NoTargets" Version="3.7.56" />
+	</ItemGroup>
+</Project>
