@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) Microsoft Corporation. All rights reserved.
+  
+  Licensed under the MIT license.
+-->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<PackageReference Include="Microsoft.PowerApps.MSBuild.Pcf" Version="1.*" />
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ExcludeDirectories Include=".vs" />
+		<ExcludeDirectories Include=".gitignore" />
+		<ExcludeDirectories Include="bin\**" />
+		<ExcludeDirectories Include="obj\**" />
+		<ExcludeDirectories Include="*.cdsproj" />
+		<ExcludeDirectories Include="*.cdsproj.user" />
+		<ExcludeDirectories Include="*.sln" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ExcludeDirectories Include=".gitignore" />
+		<ExcludeDirectories Include="bin\**" />
+		<ExcludeDirectories Include="obj\**" />
+		<ExcludeDirectories Include="$(OutputPath)\**" />
+		<ExcludeDirectories Include="*.pcfproj" />
+		<ExcludeDirectories Include="*.pcfproj.user" />
+		<ExcludeDirectories Include="*.sln" />
+		<ExcludeDirectories Include="node_modules\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="./**" Exclude="@(ExcludeDirectories)" />
+		<None Remove="@(ExcludeDirectories)" />
+		<None Remove=".vs/**" />	
+		<None Remove="bin\**" />	
+		<Content Remove="@(ExcludeDirectories)" />
+		<Content Remove="bin\**" />
+	</ItemGroup>
+
+	<Import 
+		Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets" 
+		Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets')" 
+	/>
+</Project>

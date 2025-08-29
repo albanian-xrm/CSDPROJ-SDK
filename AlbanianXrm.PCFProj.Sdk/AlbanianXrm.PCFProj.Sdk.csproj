@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
-		<Description>Provides targets for dataverse solution projects (.cdsproj).</Description>
+		<Description>Provides targets for dataverse PCF projects (.pcfproj).</Description>
 		<PackageTags>MSBuild MSBuildSdk dataverse PowerPlatform</PackageTags>
 		<PackageIcon>Logo.png</PackageIcon>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
