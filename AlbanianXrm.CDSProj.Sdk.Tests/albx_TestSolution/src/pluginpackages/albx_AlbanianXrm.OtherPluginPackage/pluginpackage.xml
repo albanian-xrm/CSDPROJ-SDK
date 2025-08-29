@@ -1,0 +1,9 @@
+<pluginpackage uniquename="albx_AlbanianXrm.OtherPluginPackage">
+  <exportkeyversion>1</exportkeyversion>
+  <iscustomizable>1</iscustomizable>
+  <name>albx_AlbanianXrm.OtherPluginPackage</name>
+  <package mimetype="application/octet-stream">albx_AlbanianXrm.OtherPluginPackage.nupkg</package>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <version>1.0.0</version>
+</pluginpackage>
