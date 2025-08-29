@@ -1,0 +1,43 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: 'AlbanianXrm.CDSProj.Sdk.sln'
+
+- task: VSBuild@1
+  inputs:
+    solution: 'AlbanianXrm.CDSProj.Sdk.sln'
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: 'AlbanianXrm.CDSProj.Sdk.Tests\AlbanianXrm.CDSProj.Sdk.Tests.sln'
+
+- task: VSBuild@1
+  inputs:
+    solution: 'AlbanianXrm.CDSProj.Sdk.Tests\AlbanianXrm.CDSProj.Sdk.Tests.sln'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'AlbanianXrm.CDSProj.Sdk\bin\Debug\AlbanianXrm.CDSProj.Sdk.*.nupkg'
+    artifact: 'AlbanianXrm.CDSProj.Sdk'
+    publishLocation: 'pipeline'
+
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'AlbanianXrm.PCFProj.Sdk\bin\Debug\AlbanianXrm.PCFProj.Sdk.*.nupkg'
+    artifact: 'AlbanianXrm.PCFProj.Sdk'
+    publishLocation: 'pipeline'
