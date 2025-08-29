@@ -5,9 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<LinkedPluginPackage Include="AlbanianXrm.PluginPackage">
-			<ProjectPath>..\</ProjectPath>
-			<PublisherPrefix>albx</PublisherPrefix>
-		</LinkedPluginPackage>
+		<DataversePluginPackage Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
 	</ItemGroup>
+
 </Project>

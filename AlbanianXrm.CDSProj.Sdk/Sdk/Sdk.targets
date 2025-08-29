@@ -37,45 +37,153 @@
 		<Content Remove="bin\**" />
 	</ItemGroup>
 
-	<Target Name="CopyPluginPackages" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="CopyCdsSolutionContent">
+	<Target Name="CopyPluginPackages" Inputs="@DataversePluginPackage" Outputs="%(DataversePluginPackage.Identity)" BeforeTargets="CopyCdsSolutionContent">
+		<!--<XmlPeek 
+			XmlInputPath="%(DataversePluginPackage.Identity)" 
+			Query="Project/PropertyGroup/PackageId/text()"
+		>
+			<Output TaskParameter="Result" ItemName="DataversePluginPackageId" />
+		</XmlPeek>-->
+		<!--<MSBuild Projects="%(DataversePluginPackage.Identity)"
+				 Targets="GetTargetPath"
+				 Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+		>
+			<Output TaskParameter="TargetOutputs" ItemName="DataversePluginPackageOutput" />
+		</MSBuild>-->
+
+		<Message Text="Copying %(DataversePluginPackage.DataversePluginPackageId): %(DataversePluginPackage.ProjectRelativeDir)" Importance="high" />
+
 		<!-- Copy the built package to the solution folder -->
-		<Copy SourceFiles="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\bin\$(Configuration)\%(LinkedPluginPackage.Identity).$(FileVersion).nupkg"
-			  DestinationFiles="src\pluginpackages\%(LinkedPluginPackage.PublisherPrefix)_%(LinkedPluginPackage.Identity)\package\%(LinkedPluginPackage.PublisherPrefix)_%(LinkedPluginPackage.Identity).nupkg"
+		<Copy SourceFiles="%(DataversePluginPackage.ProjectRelativeDir)%(DataversePluginPackage.DataversePluginPackageId).$(FileVersion).nupkg"
+			  DestinationFiles="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\package\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg"
 			  OverwriteReadOnlyFiles="true" />
 	</Target>
 
-	<Target Name="PackPlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="CopyPluginPackages">
-		<!-- Build the linked project -->
-		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Pack" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
+	<Target
+		Name="_CalculateDataversePluginsPath"
+		Inputs="@DataversePluginPackage"
+		Outputs="%(DataversePluginPackage.Identity)"
+		BeforeTargets="CopyPluginPackages"
+	>
+		<MSBuild Projects="%(DataversePluginPackage.Identity)"
+				 Targets="_GetOutputItemsFromPack"
+				 Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+		>
+			<Output TaskParameter="TargetOutputs" ItemName="DataversePluginPackageOutput" />
 		</MSBuild>
+		<ItemGroup>
+			<DataversePluginPackage Update="%(Identity)" Condition="$([System.String]::new(%(DataversePluginPackageOutput.Identity)).EndsWith('nupkg'))">
+				<ProjectRelativeDir>%(DataversePluginPackageOutput.RelativeDir)</ProjectRelativeDir>
+			</DataversePluginPackage>
+		</ItemGroup>
 	</Target>
 
-	<Target Name="BuildPlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="PackPlugins">
-		<!-- Build the linked project -->
-		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Build" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
-		</MSBuild>
+	<Target
+		Name="_CalculateDataversePluginsPackageId"
+		Inputs="@DataversePluginPackage"
+		Outputs="%(DataversePluginPackage.Identity)"
+		BeforeTargets="CopyPluginPackages"
+	>
+		<XmlPeek
+			XmlInputPath="%(DataversePluginPackage.Identity)"
+			Query="Project/PropertyGroup/PackageId/text()"
+		>
+			<Output TaskParameter="Result" ItemName="DataversePluginPackageId" />
+		</XmlPeek>
+		<ItemGroup>
+			<DataversePluginPackage Update="%(Identity)">
+				<DataversePluginPackageId>%(DataversePluginPackageId.Identity)</DataversePluginPackageId>
+			</DataversePluginPackage>
+		</ItemGroup>
 	</Target>
 
-	<Target Name="CleanPlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="Clean">
-		<!-- Build the linked project -->
-		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Clean" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
-		</MSBuild>
+	<Target 
+		Name="PackPlugins" 
+		Inputs="@DataversePluginPackage" 
+		Outputs="%(DataversePluginPackage.Identity)" 
+		BeforeTargets="CopyPluginPackages"
+	>
+		<!-- Pack the linked project -->
+		<MSBuild 
+			Projects="%(DataversePluginPackage.Identity)" 
+			Targets="Pack" 
+			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+		/>
 	</Target>
 
-	<Target Name="RestorePlugins" Inputs="@LinkedPluginPackage" Outputs="%(LinkedPluginPackage.Identity)" BeforeTargets="Restore">
+	<Target 
+		Name="BuildPlugins" 
+		Inputs="@DataversePluginPackage" 
+		Outputs="%(DataversePluginPackage.Identity)" 
+		BeforeTargets="PackPlugins"
+	>
 		<!-- Build the linked project -->
-		<MSBuild Projects="%(LinkedPluginPackage.ProjectPath)%(LinkedPluginPackage.Identity)\%(LinkedPluginPackage.Identity).csproj" Targets="Restore" Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)">
-		</MSBuild>
-
+		<MSBuild 
+			Projects="%(DataversePluginPackage.Identity)" 
+			Targets="Build" 
+			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+		/>
 	</Target>
 
-	<Target Name="SetFileVersion" Condition="'$(FileVersion)' == ''" BeforeTargets="CopyPluginPackages;CleanPlugins;RestorePlugins">
-		<XmlPeek XmlInputPath="$(SolutionRootPath)\Other\Solution.xml" Query="ImportExportXml/SolutionManifest/Version/text()">
+	<Target 
+		Name="CleanPlugins" 
+		Inputs="@DataversePluginPackage" 
+		Outputs="%(DataversePluginPackage.Identity)" 
+		BeforeTargets="Clean"
+	>
+		<!-- Clean the linked project -->
+		<MSBuild 
+			Projects="%(DataversePluginPackage.Identity)" 
+			Targets="Clean" 
+			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+		/>
+	</Target>
+
+	<Target 
+		Name="RestorePlugins" 
+		Inputs="@DataversePluginPackage" 
+		Outputs="%(DataversePluginPackage.Identity)" 
+		BeforeTargets="Restore"
+	>
+		<!-- Restore the linked project -->
+		<MSBuild 
+			Projects="%(DataversePluginPackage.Identity)" 
+			Targets="Restore" 
+			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+		/>
+	</Target>
+
+	<Target 
+		Name="SetFileVersion" 
+		Condition="'$(FileVersion)' == ''" 
+		BeforeTargets="CopyPluginPackages;CleanPlugins;RestorePlugins"
+	>
+		<XmlPeek 
+			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml" 
+			Query="ImportExportXml/SolutionManifest/Version/text()"
+		>
 			<Output TaskParameter="Result" ItemName="SolutionVersion" />
 		</XmlPeek>
-		<Message Text="Building Solution v@(SolutionVersion)" Importance="high" />
+		<Message Text="Solution version @(SolutionVersion)" Importance="high" />
 		<PropertyGroup>
 			<FileVersion>@(SolutionVersion)</FileVersion>
+		</PropertyGroup>
+	</Target>
+	
+	<Target 
+		Name="SetPublisherPrefix" 
+		Condition="'$(PublisherPrefix)' == ''" 
+		BeforeTargets="CopyPluginPackages;CleanPlugins;RestorePlugins"
+	>
+		<XmlPeek 
+			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml" 
+			Query="ImportExportXml/SolutionManifest/Publisher/CustomizationPrefix/text()"
+		>
+			<Output TaskParameter="Result" ItemName="PublisherPrefix" />
+		</XmlPeek>
+		<Message Text="Publisher Prefix @(PublisherPrefix)" Importance="high" />
+		<PropertyGroup>
+			<PublisherPrefix>@(PublisherPrefix)</PublisherPrefix>
 		</PropertyGroup>
 	</Target>
 </Project>
