@@ -8,13 +8,12 @@
 		<PackageType>MSBuildSdk</PackageType>
 		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 		<Version>1.0.0</Version>
+	    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="Sdk/**">
-			<Pack>true</Pack>
-			<PackagePath>Sdk</PackagePath>
-		</Content>
+		<Content Include="Sdk/**" Pack="true" PackagePath="Sdk" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -22,10 +21,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Logo.png">
-	    <Pack>true</Pack>
-		  <PackagePath>\</PackagePath>
-	  </Content>
+	  <Content Include="Logo.png" Pack="true" PackagePath="\" />
+	  <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+	  <None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
