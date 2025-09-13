@@ -37,11 +37,13 @@ steps:
     solution: 'AlbanianXrm.CDSProj.Sdk.Tests\AlbanianXrm.CDSProj.Sdk.Tests.sln'
 
 - pwsh: |
+    New-Item -ItemType Directory -Force -Path $(Build.ArtifactStagingDirectory)\CDSProj
     $cdsProjPackage =  get-item  AlbanianXrm.CDSProj.Sdk\bin\Debug\AlbanianXrm.CDSProj.Sdk.*.nupkg
     $cdsProjPackage.Name.TrimStart("AlbanianXrm.CDSProj.Sdk.").TrimEnd(".nupkg") | Out-File -FilePath $(Build.ArtifactStagingDirectory)\CDSProj\Version.txt
     Rename-Item $cdsProjPackage AlbanianXrm.CDSProj.Sdk.nupkg
     Move-Item AlbanianXrm.CDSProj.Sdk/bin/Debug/AlbanianXrm.CDSProj.Sdk.nupkg -destination $(Build.ArtifactStagingDirectory)\CDSProj
 
+    New-Item -ItemType Directory -Force -Path $(Build.ArtifactStagingDirectory)\PCFProj
     $pcfProjPackage =  get-item  AlbanianXrm.PCFProj.Sdk/bin/Debug/AlbanianXrm.PCFProj.Sdk.*.nupkg
     $pcfProjPackage.Name.TrimStart("AlbanianXrm.PCFProj.Sdk.").TrimEnd(".nupkg") | Out-File -FilePath $(Build.ArtifactStagingDirectory)\PCFProj\Version.txt
     Rename-Item $pcfProjPackage AlbanianXrm.PCFProj.Sdk.nupkg
