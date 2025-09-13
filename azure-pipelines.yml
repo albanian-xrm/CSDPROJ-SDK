@@ -9,35 +9,53 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-
 steps:
 - task: NuGetToolInstaller@1
+  displayName: Install NuGet Tool
+
+- script: echo Starting build pipeline!
+  displayName: 'Hello from Albanian Xrm'
 
 - task: NuGetCommand@2
+  displayName: Restore AlbanianXrm.CDSProj.Sdk.sln 
   inputs:
     restoreSolution: 'AlbanianXrm.CDSProj.Sdk.sln'
 
 - task: VSBuild@1
+  displayName: Build AlbanianXrm.CDSProj.Sdk.sln
   inputs:
     solution: 'AlbanianXrm.CDSProj.Sdk.sln'
 
 - task: NuGetCommand@2
+  displayName: Restore AlbanianXrm.CDSProj.Sdk.Tests.sln
   inputs:
     restoreSolution: 'AlbanianXrm.CDSProj.Sdk.Tests\AlbanianXrm.CDSProj.Sdk.Tests.sln'
 
 - task: VSBuild@1
+  displayName: Build AlbanianXrm.CDSProj.Sdk.Tests.sln
   inputs:
     solution: 'AlbanianXrm.CDSProj.Sdk.Tests\AlbanianXrm.CDSProj.Sdk.Tests.sln'
 
+- pwsh: |
+    $cdsProjPackage =  get-item  AlbanianXrm.CDSProj.Sdk\bin\Debug\AlbanianXrm.CDSProj.Sdk.*.nupkg
+    $cdsProjPackage.Name.TrimStart("AlbanianXrm.CDSProj.Sdk.").TrimEnd(".nupkg") | Out-File -FilePath $(Build.ArtifactStagingDirectory)\CDSProj\Version.txt
+    Rename-Item $cdsProjPackage AlbanianXrm.CDSProj.Sdk.nupkg
+    Move-Item AlbanianXrm.CDSProj.Sdk/bin/Debug/AlbanianXrm.CDSProj.Sdk.nupkg -destination $(Build.ArtifactStagingDirectory)\CDSProj
+
+    $pcfProjPackage =  get-item  AlbanianXrm.PCFProj.Sdk/bin/Debug/AlbanianXrm.PCFProj.Sdk.*.nupkg
+    $pcfProjPackage.Name.TrimStart("AlbanianXrm.PCFProj.Sdk.").TrimEnd(".nupkg") | Out-File -FilePath $(Build.ArtifactStagingDirectory)\PCFProj\Version.txt
+    Rename-Item $pcfProjPackage AlbanianXrm.PCFProj.Sdk.nupkg
+    Move-Item AlbanianXrm.PCFProj.Sdk/bin/Debug/AlbanianXrm.PCFProj.Sdk.nupkg -destination $(Build.ArtifactStagingDirectory)\PCFProj
+  displayName: Move packages to Artifacts Staging Directory
+
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'AlbanianXrm.CDSProj.Sdk\bin\Debug\AlbanianXrm.CDSProj.Sdk.*.nupkg'
+    targetPath: '$(Build.ArtifactStagingDirectory)\CDSProj'
     artifact: 'AlbanianXrm.CDSProj.Sdk'
     publishLocation: 'pipeline'
 
-
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'AlbanianXrm.PCFProj.Sdk\bin\Debug\AlbanianXrm.PCFProj.Sdk.*.nupkg'
+    targetPath: ' $(Build.ArtifactStagingDirectory)\PCFProj'
     artifact: 'AlbanianXrm.PCFProj.Sdk'
     publishLocation: 'pipeline'
