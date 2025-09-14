@@ -15,6 +15,9 @@ To use this just reference the Sdk using a specific version and the build system
 
 </Project>
 ```
+The projects are able to load in a visual studio solution.
+
+<img width="958" height="516" alt="AlbanianXrm CDSProj Sdk in Visual Studio" src="https://github.com/user-attachments/assets/8228cd10-fd19-4f15-bd22-c07b49a6335e" />
 
 # AlbanianXrm.PCFProj.Sdk
 
