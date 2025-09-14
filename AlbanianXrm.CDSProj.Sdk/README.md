@@ -6,11 +6,7 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.0">
-	<PropertyGroup>
-		<ProjectGuid>81f4e2f5-d9e9-411b-879f-06c144f84f3c</ProjectGuid>
-	</PropertyGroup>
-
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.1">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
