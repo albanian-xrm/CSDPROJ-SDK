@@ -46,6 +46,7 @@
 		<!-- Copy the built package to the solution folder -->
 		<Copy SourceFiles="%(DataversePluginPackage.ProjectRelativeDir)%(DataversePluginPackage.DataversePluginPackageId).$(FileVersion).nupkg"
 			  DestinationFiles="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\package\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg"
+			  Condition="'%(DataversePluginPackage.Identity)'!=''"
 			  OverwriteReadOnlyFiles="true" />
 	</Target>
 
@@ -123,6 +124,7 @@
 		<XmlPeek
 			XmlInputPath="%(ProjectReference.Identity)"
 			Query="Project/PropertyGroup/PackageId/text()"
+			Condition="'%(ProjectReference.Identity)'!=''"
 		>
 			<Output TaskParameter="Result" ItemName="DataversePluginPackageId" />
 		</XmlPeek>
