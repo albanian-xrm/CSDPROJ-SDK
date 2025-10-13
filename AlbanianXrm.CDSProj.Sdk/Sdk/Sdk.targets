@@ -151,12 +151,13 @@
 		<Message Text="Solution version @(SolutionVersion)" Importance="high" />
 		<PropertyGroup>
 			<FileVersion>@(SolutionVersion)</FileVersion>
+			<_ReadFileVersionFromSolution>true</_ReadFileVersionFromSolution>
 		</PropertyGroup>
 	</Target>
 
 	<Target
 		Name="_SetFileVersionOnSolution"
-		Condition="'$(FileVersion)' != ''"
+		Condition="'$(FileVersion)' != '' AND '$(_ReadFileVersionFromSolution)' != 'true'"
 		BeforeTargets="_CalculateDataversePluginsPackageId;_CalculateDataversePluginsPath;CopyPluginPackages;CleanPlugins;RestorePlugins;PackPlugins"
 	>
 		<XmlPoke
