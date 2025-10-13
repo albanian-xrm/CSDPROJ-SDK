@@ -153,6 +153,19 @@
 			<FileVersion>@(SolutionVersion)</FileVersion>
 		</PropertyGroup>
 	</Target>
+
+	<Target
+		Name="_SetFileVersionOnSolution"
+		Condition="'$(FileVersion)' != ''"
+		BeforeTargets="_CalculateDataversePluginsPackageId;_CalculateDataversePluginsPath;CopyPluginPackages;CleanPlugins;RestorePlugins;PackPlugins"
+	>
+		<XmlPoke
+			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
+			Query="ImportExportXml/SolutionManifest/Version"
+			Value="$(FileVersion)"
+		/>
+		<Message Text="Set Solution version to @(FileVersion)" Importance="high" />
+	</Target>
 	
 	<Target 
 		Name="_SetPublisherPrefix" 
