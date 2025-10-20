@@ -6,12 +6,11 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.4">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.5">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj" />
 	</ItemGroup>
-
 </Project>
 ```

@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.ServiceModel;
 
-namespace albx_PluginPackage
+namespace AlbanianXrm.PluginPackage
 {
     /// <summary>
     /// Base class for all plug-in classes.

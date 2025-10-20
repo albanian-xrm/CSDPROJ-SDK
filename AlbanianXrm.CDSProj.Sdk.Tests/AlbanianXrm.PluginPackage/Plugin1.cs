@@ -1,7 +1,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 
-namespace albx_PluginPackage
+namespace AlbanianXrm.PluginPackage
 {
     /// <summary>
     /// Plugin development guide: https://docs.microsoft.com/powerapps/developer/common-data-service/plug-ins

@@ -42,12 +42,26 @@
 			BeforeTargets="CopyCdsSolutionContent"
 	>
 		<Message Text="Copying %(DataversePluginPackage.DataversePluginPackageId): %(DataversePluginPackage.ProjectRelativeDir)" Importance="high" />
-
+		<PropertyGroup>
+			<_PluginPackageXml>&lt;pluginpackage uniquename=&quot;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&quot;&gt;
+  &lt;exportkeyversion&gt;1&lt;/exportkeyversion&gt;
+  &lt;iscustomizable&gt;1&lt;/iscustomizable&gt;
+  &lt;name&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&lt;/name&gt;
+  &lt;package mimetype=&quot;application/octet-stream&quot;&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg&lt;/package&gt;
+  &lt;statecode&gt;0&lt;/statecode&gt;
+  &lt;statuscode&gt;1&lt;/statuscode&gt;
+  &lt;version&gt;$(FileVersion)&lt;/version&gt;
+&lt;/pluginpackage&gt;</_PluginPackageXml>
+		</PropertyGroup>
 		<!-- Copy the built package to the solution folder -->
 		<Copy SourceFiles="%(DataversePluginPackage.ProjectRelativeDir)%(DataversePluginPackage.DataversePluginPackageId).$(FileVersion).nupkg"
 			  DestinationFiles="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\package\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg"
 			  Condition="'%(DataversePluginPackage.Identity)'!=''"
 			  OverwriteReadOnlyFiles="true" />
+		<WriteLinesToFile
+			  File="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\pluginpackage.xml"
+		      Overwrite="true"
+	          Lines="$(_PluginPackageXml)" />
 	</Target>
 
 	<Target
