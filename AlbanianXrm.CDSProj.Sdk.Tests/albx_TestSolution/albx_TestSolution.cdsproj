@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.5">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.6">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="src\pluginpackages\albx_AlbanianXrm.OtherPluginPackage\pluginpackage.xml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="src\pluginpackages\albx_AlbanianXrm.PluginPackage\pluginpackage.xml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="src\pluginpackages\albx_AlbanianXrm.PluginPackage\pluginpackage.xml" />
 	</ItemGroup>
 </Project>

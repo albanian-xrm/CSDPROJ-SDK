@@ -43,9 +43,14 @@
 	>
 		<Message Text="Copying %(DataversePluginPackage.DataversePluginPackageId): %(DataversePluginPackage.ProjectRelativeDir)" Importance="high" />
 		<PropertyGroup>
+			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'!=''">
+  &lt;managedidentityid&gt;
+    &lt;managedidentityid&gt;%(DataversePluginPackage.ManagedIdentityId)&lt;/managedidentityid&gt;
+  &lt;/managedidentityid&gt;</_ManagedIdentityId>
+			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'==''"></_ManagedIdentityId>
 			<_PluginPackageXml>&lt;pluginpackage uniquename=&quot;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&quot;&gt;
   &lt;exportkeyversion&gt;1&lt;/exportkeyversion&gt;
-  &lt;iscustomizable&gt;1&lt;/iscustomizable&gt;
+  &lt;iscustomizable&gt;1&lt;/iscustomizable&gt;$(_ManagedIdentityId)
   &lt;name&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&lt;/name&gt;
   &lt;package mimetype=&quot;application/octet-stream&quot;&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg&lt;/package&gt;
   &lt;statecode&gt;0&lt;/statecode&gt;
@@ -131,9 +136,28 @@
 	</Target>
 
 	<Target
+		Name="_CalculateDataversePluginsManagedIdentityId"
+		Outputs="%(DataversePluginPackage.Identity)"
+		BeforeTargets="_CalculateDataversePluginsPath;CleanPlugins;RestorePlugins;PackPlugins;ProcessCdsProjectReferencesOutputs"
+	>
+		<XmlPeek
+			XmlInputPath="%(DataversePluginPackage.Identity)"
+			Query="Project/PropertyGroup/ManagedIdentityId/text()"
+			Condition="'%(DataversePluginPackage.Identity)'!=''"
+		>
+			<Output TaskParameter="Result" ItemName="DataverseManagedIdentityId" />
+		</XmlPeek>
+		<ItemGroup>
+			<DataversePluginPackage Update="%(DataversePluginPackage.Identity)" Condition="'@(DataverseManagedIdentityId)' != ''">
+				<ManagedIdentityId>@(DataverseManagedIdentityId)</ManagedIdentityId>
+			</DataversePluginPackage>
+		</ItemGroup>
+	</Target>
+
+	<Target
 		Name="_CalculateDataversePluginsPackageId"
 		Outputs="%(ProjectReference.Identity)"
-		BeforeTargets="_CalculateDataversePluginsPath;CleanPlugins;RestorePlugins;PackPlugins;ProcessCdsProjectReferencesOutputs"
+		BeforeTargets="_CalculateDataversePluginsManagedIdentityId;_CalculateDataversePluginsPath;CleanPlugins;RestorePlugins;PackPlugins;ProcessCdsProjectReferencesOutputs"
 	>
 		<XmlPeek
 			XmlInputPath="%(ProjectReference.Identity)"

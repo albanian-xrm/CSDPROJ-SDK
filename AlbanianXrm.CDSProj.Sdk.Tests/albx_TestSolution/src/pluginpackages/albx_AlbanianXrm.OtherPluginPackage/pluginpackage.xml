@@ -1,6 +1,9 @@
 <pluginpackage uniquename="albx_AlbanianXrm.OtherPluginPackage">
   <exportkeyversion>1</exportkeyversion>
   <iscustomizable>1</iscustomizable>
+  <managedidentityid>
+    <managedidentityid>316c9a96-293f-46a6-86af-ca020dd5d742</managedidentityid>
+  </managedidentityid>
   <name>albx_AlbanianXrm.OtherPluginPackage</name>
   <package mimetype="application/octet-stream">albx_AlbanianXrm.OtherPluginPackage.nupkg</package>
   <statecode>0</statecode>

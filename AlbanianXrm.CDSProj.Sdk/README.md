@@ -6,7 +6,15 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.5">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.6">
+</Project>
+```
+
+Reference your plugin packages and PCFs normally using ProjectReference tags.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.6">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
@@ -14,3 +22,8 @@ To use this just reference the Sdk using a specific version and the build system
 	</ItemGroup>
 </Project>
 ```
+
+The version of the packaged solution and plugins will be read in the `solution.xml` file if the `FileVersion` property is not specified during build.
+
+If you want to use [Managed Identities]() then specify the `ManagedIdentityId` property in your plugin package project. 
+There is a target that makes sure that the `pluginpackage.xml` is properly regenerated on build.

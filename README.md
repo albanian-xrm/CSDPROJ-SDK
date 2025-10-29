@@ -6,15 +6,28 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.5">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.6">
+</Project>
+```
+
+Reference your plugin packages and PCFs normally using ProjectReference tags.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.6">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj" />
 	</ItemGroup>
-
 </Project>
 ```
+
+The version of the packaged solution and plugins will be read in the `solution.xml` file if the `FileVersion` property is not specified during build.
+
+If you want to use [Managed Identities](https://learn.microsoft.com/en-us/power-platform/admin/set-up-managed-identity) then specify the `ManagedIdentityId` property in your plugin package project. 
+There is a target that makes sure that the `pluginpackage.xml` is properly regenerated on build.
+
 The projects are able to load in a visual studio solution.
 
 <img width="958" height="516" alt="AlbanianXrm CDSProj Sdk in Visual Studio" src="https://github.com/user-attachments/assets/8228cd10-fd19-4f15-bd22-c07b49a6335e" />

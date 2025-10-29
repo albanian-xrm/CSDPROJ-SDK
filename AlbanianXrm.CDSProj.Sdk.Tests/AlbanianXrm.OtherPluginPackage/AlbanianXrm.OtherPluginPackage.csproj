@@ -16,6 +16,7 @@
   -->
   <PropertyGroup>
     <PackageId>AlbanianXrm.OtherPluginPackage</PackageId>
+	<ManagedIdentityId>316c9a96-293f-46a6-86af-ca020dd5d742</ManagedIdentityId>
     <Version>$(FileVersion)</Version>
     <Authors>BetimBeja</Authors>
     <Company>AlbanianXrm</Company>
