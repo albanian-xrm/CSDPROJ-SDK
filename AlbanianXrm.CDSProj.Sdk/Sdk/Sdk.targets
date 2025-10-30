@@ -170,6 +170,7 @@
 		<ItemGroup>
 			<DataversePluginPackage Include="%(ProjectReference.Identity)"  Condition="'@(DataversePluginPackageId)' != ''">
 				<DataversePluginPackageId>@(DataversePluginPackageId)</DataversePluginPackageId>
+				<ManagedIdentityId>%(ProjectReference.ManagedIdentityId)</ManagedIdentityId>
 			</DataversePluginPackage>
 			<ProjectReference Remove="%(ProjectReference.Identity)"  Condition="'@(DataversePluginPackageId)' != ''" />
 		</ItemGroup>
