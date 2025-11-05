@@ -1,0 +1,2 @@
+﻿v1.0.1: 
+ - Improved packages documentation and icon

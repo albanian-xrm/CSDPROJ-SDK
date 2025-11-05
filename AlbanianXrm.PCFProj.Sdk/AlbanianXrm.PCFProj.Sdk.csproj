@@ -28,8 +28,13 @@
 	  <None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Build.NoTargets" Version="3.7.56" />
 	</ItemGroup>
+
+	<Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+		<PropertyGroup>
+			<PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotes.txt"))%0a$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotesArchive.txt"))</PackageReleaseNotes>
+		</PropertyGroup>
+	</Target>
 </Project>

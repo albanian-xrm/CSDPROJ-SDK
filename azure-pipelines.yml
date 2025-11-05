@@ -42,12 +42,14 @@ steps:
     $cdsProjPackage.Name.TrimStart("AlbanianXrm.CDSProj.Sdk.").TrimEnd(".nupkg") | Out-File -FilePath $(Build.ArtifactStagingDirectory)\CDSProj\Version.txt
     Rename-Item $cdsProjPackage AlbanianXrm.CDSProj.Sdk.nupkg
     Move-Item AlbanianXrm.CDSProj.Sdk/bin/Debug/AlbanianXrm.CDSProj.Sdk.nupkg -destination $(Build.ArtifactStagingDirectory)\CDSProj
+    Copy-Item AlbanianXrm.CDSProj.Sdk/ReleaseNotes.txt -Destination $(Build.ArtifactStagingDirectory)\CDSProj\ReleaseNotes.txt
 
     New-Item -ItemType Directory -Force -Path $(Build.ArtifactStagingDirectory)\PCFProj
     $pcfProjPackage =  get-item  AlbanianXrm.PCFProj.Sdk/bin/Debug/AlbanianXrm.PCFProj.Sdk.*.nupkg
     $pcfProjPackage.Name.TrimStart("AlbanianXrm.PCFProj.Sdk.").TrimEnd(".nupkg") | Out-File -FilePath $(Build.ArtifactStagingDirectory)\PCFProj\Version.txt
     Rename-Item $pcfProjPackage AlbanianXrm.PCFProj.Sdk.nupkg
     Move-Item AlbanianXrm.PCFProj.Sdk/bin/Debug/AlbanianXrm.PCFProj.Sdk.nupkg -destination $(Build.ArtifactStagingDirectory)\PCFProj
+    Copy-Item AlbanianXrm.PCFProj.Sdk/ReleaseNotes.txt -Destination $(Build.ArtifactStagingDirectory)\PCFProj\ReleaseNotes.txt
   displayName: Move packages to Artifacts Staging Directory
 
 - task: PublishPipelineArtifact@1
