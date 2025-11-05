@@ -1,0 +1,2 @@
+﻿v1.0.8: 
+ - Fixed bug incorrectly generating pluginpackage.xml file when no plugin packages are referenced.

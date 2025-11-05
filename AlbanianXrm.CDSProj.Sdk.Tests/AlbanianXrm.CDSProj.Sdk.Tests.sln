@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "albx_TestSolution", "albx_TestSolution\albx_TestSolution.cdsproj", "{81F4E2F5-D9E9-411B-879F-06C144F84F3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "albx_TestSolution", "albx_TestSolution\albx_TestSolution.cdsproj", "{81F4E2F5-D9E9-411B-879F-06C144F84F3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbanianXrm.PluginPackage", "AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj", "{D092D4D2-7385-9848-DFD3-C66FDE139A30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "albx_TestSolutionOnlyPCF", "albx_TestSolutionOnlyPCF\albx_TestSolutionOnlyPCF.cdsproj", "{81F4E2F5-D9E9-411B-879F-06C144F84F3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbanianXrm.OtherPluginPackage", "AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj", "{8DB6AA66-8BD8-2E01-303C-CAD5E9BE2AC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "albx_TestSolutionOnlyPlugins", "albx_TestSolutionOnlyPlugins\albx_TestSolutionOnlyPlugins.cdsproj", "{81F4E2F5-D9E9-411B-879F-06C144F84F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbanianXrm.LinearInputPCF", "AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj", "{7A3744CB-7515-47E3-AD37-3EDF2A49B115}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.PluginPackage", "AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj", "{D092D4D2-7385-9848-DFD3-C66FDE139A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbanianXrm.YetAnotherPluginPackage", "AlbanianXrm.YetAnotherPluginPackage\AlbanianXrm.YetAnotherPluginPackage.csproj", "{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.OtherPluginPackage", "AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj", "{8DB6AA66-8BD8-2E01-303C-CAD5E9BE2AC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.LinearInputPCF", "AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj", "{7A3744CB-7515-47E3-AD37-3EDF2A49B115}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.YetAnotherPluginPackage", "AlbanianXrm.YetAnotherPluginPackage\AlbanianXrm.YetAnotherPluginPackage.csproj", "{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,30 @@ Global
 		{81F4E2F5-D9E9-411B-879F-06C144F84F3C}.Release|x64.Build.0 = Release|Any CPU
 		{81F4E2F5-D9E9-411B-879F-06C144F84F3C}.Release|x86.ActiveCfg = Release|Any CPU
 		{81F4E2F5-D9E9-411B-879F-06C144F84F3C}.Release|x86.Build.0 = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Debug|x64.Build.0 = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Debug|x86.Build.0 = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Release|x64.ActiveCfg = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Release|x64.Build.0 = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Release|x86.ActiveCfg = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3D}.Release|x86.Build.0 = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Debug|x64.Build.0 = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Debug|x86.Build.0 = Debug|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Release|x64.ActiveCfg = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Release|x64.Build.0 = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Release|x86.ActiveCfg = Release|Any CPU
+		{81F4E2F5-D9E9-411B-879F-06C144F84F3E}.Release|x86.Build.0 = Release|Any CPU
 		{D092D4D2-7385-9848-DFD3-C66FDE139A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D092D4D2-7385-9848-DFD3-C66FDE139A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D092D4D2-7385-9848-DFD3-C66FDE139A30}.Debug|x64.ActiveCfg = Debug|Any CPU

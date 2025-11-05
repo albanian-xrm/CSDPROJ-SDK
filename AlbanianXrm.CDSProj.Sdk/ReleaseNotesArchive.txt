@@ -1,0 +1,25 @@
+﻿v1.0.7:
+ - Improved support for ManagedIdentities in Plugins
+
+v1.0.6:
+ - Added support for ManagedIdentity in plugins
+
+v1.0.5:
+ -  Regenerate pluginpackage.xml when packing plugin packages.
+
+This might get deleted by doing pac solution sync
+
+v1.0.4:
+ - correctly excluding _SetFileVersionOnSolution to prevent unintentional file update
+
+v1.0.3:
+ - Updates solution version when FileVersion property is specified on build
+
+v1.0.2:
+ - Fixed bug with cds projects that don't reference a plugin package project
+
+v1.0.1:
+ - Improved packages documentation and icon
+
+v1.0.0:
+ - First release of AlbanianXrm.CDSProj.SDK

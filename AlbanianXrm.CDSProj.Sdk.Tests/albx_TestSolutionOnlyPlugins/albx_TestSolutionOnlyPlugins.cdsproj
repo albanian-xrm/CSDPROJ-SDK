@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.8">
+	<ItemGroup>
+		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
+		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
+		<ProjectReference Include="..\AlbanianXrm.YetAnotherPluginPackage\AlbanianXrm.YetAnotherPluginPackage.csproj">
+			<ManagedIdentityId>50d2aee4-08c4-4f5d-bb9b-9ce93923da42</ManagedIdentityId>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

@@ -61,11 +61,12 @@
 		<!-- Copy the built package to the solution folder -->
 		<Copy SourceFiles="%(DataversePluginPackage.ProjectRelativeDir)%(DataversePluginPackage.DataversePluginPackageId).$(FileVersion).nupkg"
 			  DestinationFiles="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\package\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg"
-			  Condition="'%(DataversePluginPackage.Identity)'!=''"
+			  Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!=''"
 			  OverwriteReadOnlyFiles="true" />
 		<WriteLinesToFile
 			  File="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\pluginpackage.xml"
 		      Overwrite="true"
+			  Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!=''"
 	          Lines="$(_PluginPackageXml)" />
 	</Target>
 
