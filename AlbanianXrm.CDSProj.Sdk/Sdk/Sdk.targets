@@ -37,29 +37,29 @@
 		<Content Remove="bin\**" />
 	</ItemGroup>
 
-	<Target Name="CopyPluginPackages" 
+	<Target Name="CopyPluginPackages"
 			Outputs="%(DataversePluginPackage.Identity)"
 			BeforeTargets="CopyCdsSolutionContent"
 	>
-		<Message Text="Copying %(DataversePluginPackage.DataversePluginPackageId): %(DataversePluginPackage.ProjectRelativeDir)" Importance="high" />
+		<Message Text="Copying %(DataversePluginPackage.DataversePluginPackageId): %(DataversePluginPackage.DataversePluginPackageOutput)" Importance="high" />
 		<PropertyGroup>
 			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'!=''">
-  &lt;managedidentityid&gt;
-    &lt;managedidentityid&gt;%(DataversePluginPackage.ManagedIdentityId)&lt;/managedidentityid&gt;
+				&lt;managedidentityid&gt;
+				&lt;managedidentityid&gt;%(DataversePluginPackage.ManagedIdentityId)&lt;/managedidentityid&gt;
   &lt;/managedidentityid&gt;</_ManagedIdentityId>
 			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'==''"></_ManagedIdentityId>
 			<_PluginPackageXml>&lt;pluginpackage uniquename=&quot;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&quot;&gt;
-  &lt;exportkeyversion&gt;1&lt;/exportkeyversion&gt;
-  &lt;iscustomizable&gt;1&lt;/iscustomizable&gt;$(_ManagedIdentityId)
-  &lt;name&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&lt;/name&gt;
-  &lt;package mimetype=&quot;application/octet-stream&quot;&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg&lt;/package&gt;
-  &lt;statecode&gt;0&lt;/statecode&gt;
-  &lt;statuscode&gt;1&lt;/statuscode&gt;
-  &lt;version&gt;$(FileVersion)&lt;/version&gt;
+				&lt;exportkeyversion&gt;1&lt;/exportkeyversion&gt;
+				&lt;iscustomizable&gt;1&lt;/iscustomizable&gt;$(_ManagedIdentityId)
+				&lt;name&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)&lt;/name&gt;
+				&lt;package mimetype=&quot;application/octet-stream&quot;&gt;$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg&lt;/package&gt;
+				&lt;statecode&gt;0&lt;/statecode&gt;
+				&lt;statuscode&gt;1&lt;/statuscode&gt;
+				&lt;version&gt;$(FileVersion)&lt;/version&gt;
 &lt;/pluginpackage&gt;</_PluginPackageXml>
 		</PropertyGroup>
 		<!-- Copy the built package to the solution folder -->
-		<Copy SourceFiles="%(DataversePluginPackage.ProjectRelativeDir)%(DataversePluginPackage.DataversePluginPackageId).$(FileVersion).nupkg"
+		<Copy SourceFiles="%(DataversePluginPackage.DataversePluginPackageOutput)"
 			  DestinationFiles="$(SolutionRootPath)\pluginpackages\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)\package\$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId).nupkg"
 			  Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!=''"
 			  OverwriteReadOnlyFiles="true" />
@@ -77,61 +77,62 @@
 	>
 		<MSBuild Projects="%(DataversePluginPackage.Identity)"
 				 Targets="_GetOutputItemsFromPack"
-				 Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
+				 Properties="Configuration=$(Configuration);FileVersion=$(FileVersion);PackageReferenceCompatibleProjectStyle=true"
 		>
 			<Output TaskParameter="TargetOutputs" ItemName="DataversePluginPackageOutput" />
 		</MSBuild>
+		<Message Text="DataversePluginPackageOutput: @(DataversePluginPackageOutput) Project: %(DataversePluginPackage.Identity)" Importance="high"/>
 		<ItemGroup>
 			<DataversePluginPackage Update="%(DataversePluginPackage.Identity)" Condition="$([System.String]::new(%(DataversePluginPackageOutput.Identity)).EndsWith('nupkg'))">
-				<ProjectRelativeDir>%(DataversePluginPackageOutput.RelativeDir)</ProjectRelativeDir>
+				<DataversePluginPackageOutput>%(DataversePluginPackageOutput.Identity)</DataversePluginPackageOutput>
 			</DataversePluginPackage>
 		</ItemGroup>
 	</Target>
 
-	<Target 
-		Name="PackPlugins" 
+	<Target
+		Name="PackPlugins"
 		BeforeTargets="CopyPluginPackages"
 	>
 		<!-- Pack the linked project -->
-		<MSBuild 
-			Projects="%(DataversePluginPackage.Identity)" 
-			Targets="Pack" 
+		<MSBuild
+			Projects="%(DataversePluginPackage.Identity)"
+			Targets="Pack"
 			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
 		/>
 	</Target>
 
-	<Target 
-		Name="BuildPlugins" 
+	<Target
+		Name="BuildPlugins"
 		BeforeTargets="PackPlugins"
 	>
 		<!-- Build the linked project -->
-		<MSBuild 
-			Projects="%(DataversePluginPackage.Identity)" 
-			Targets="Build" 
+		<MSBuild
+			Projects="%(DataversePluginPackage.Identity)"
+			Targets="Build"
 			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
 		/>
 	</Target>
 
-	<Target 
-		Name="CleanPlugins" 
+	<Target
+		Name="CleanPlugins"
 		BeforeTargets="Clean"
 	>
 		<!-- Clean the linked project -->
-		<MSBuild 
-			Projects="%(DataversePluginPackage.Identity)" 
-			Targets="Clean" 
+		<MSBuild
+			Projects="%(DataversePluginPackage.Identity)"
+			Targets="Clean"
 			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
 		/>
 	</Target>
 
-	<Target 
-		Name="RestorePlugins" 
+	<Target
+		Name="RestorePlugins"
 		BeforeTargets="Restore"
 	>
 		<!-- Restore the linked project -->
-		<MSBuild 
-			Projects="%(DataversePluginPackage.Identity)" 
-			Targets="Restore" 
+		<MSBuild
+			Projects="%(DataversePluginPackage.Identity)"
+			Targets="Restore"
 			Properties="Configuration=$(Configuration);FileVersion=$(FileVersion)"
 		/>
 	</Target>
@@ -167,7 +168,7 @@
 		>
 			<Output TaskParameter="Result" ItemName="DataversePluginPackageId" />
 		</XmlPeek>
-		<Message Text="ProjectReference: %(ProjectReference.Identity) PackageId: @(DataversePluginPackageId)" Importance="High" />
+		<Message Text="ProjectReference: %(ProjectReference.Identity) PackageId: @(DataversePluginPackageId)"  Condition="'@(DataversePluginPackageId)' != ''" Importance="High" />
 		<ItemGroup>
 			<DataversePluginPackage Include="%(ProjectReference.Identity)"  Condition="'@(DataversePluginPackageId)' != ''">
 				<DataversePluginPackageId>@(DataversePluginPackageId)</DataversePluginPackageId>
@@ -177,13 +178,13 @@
 		</ItemGroup>
 	</Target>
 
-	<Target 
-		Name="_SetFileVersion" 
-		Condition="'$(FileVersion)' == ''" 
+	<Target
+		Name="_SetFileVersion"
+		Condition="'$(FileVersion)' == ''"
 		BeforeTargets="_CalculateDataversePluginsPackageId;_CalculateDataversePluginsPath;CopyPluginPackages;CleanPlugins;RestorePlugins;PackPlugins"
 	>
-		<XmlPeek 
-			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml" 
+		<XmlPeek
+			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
 			Query="ImportExportXml/SolutionManifest/Version/text()"
 		>
 			<Output TaskParameter="Result" ItemName="SolutionVersion" />
@@ -207,24 +208,24 @@
 		/>
 		<Message Text="Set Solution version to @(FileVersion)" Importance="high" />
 	</Target>
-	
-	<Target 
-		Name="_SetPublisherPrefix" 
-		Condition="'$(PublisherPrefix)' == ''" 
+
+	<Target
+		Name="_SetPublisherPrefix"
+		Condition="'$(PublisherPrefix)' == ''"
 		BeforeTargets="CopyPluginPackages"
 	>
-		<XmlPeek 
-			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml" 
+		<XmlPeek
+			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
 			Query="ImportExportXml/SolutionManifest/Publisher/CustomizationPrefix/text()"
 		>
-			<Output 
-				TaskParameter="Result" 
-				ItemName="PublisherPrefix" 
+			<Output
+				TaskParameter="Result"
+				ItemName="PublisherPrefix"
 			/>
 		</XmlPeek>
-		<Message 
-			Text="Publisher Prefix '@(PublisherPrefix)' read from $(SolutionRootPath)\Other\Solution.xml" 
-			Importance="high" 
+		<Message
+			Text="Publisher Prefix '@(PublisherPrefix)' read from $(SolutionRootPath)\Other\Solution.xml"
+			Importance="high"
 		/>
 		<PropertyGroup>
 			<PublisherPrefix>@(PublisherPrefix)</PublisherPrefix>

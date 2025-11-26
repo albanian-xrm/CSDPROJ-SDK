@@ -1,2 +1,3 @@
-﻿v1.0.8: 
- - Fixed bug incorrectly generating pluginpackage.xml file when no plugin packages are referenced.
+﻿v1.0.9: 
+ - Fixed bug with plugin package not getting the right version sometimes (ex. 1.0.1.0 would throw).
+ - AppendTargetFrameworkToOutputPath set to false by default to preserve paths same as MS Package.

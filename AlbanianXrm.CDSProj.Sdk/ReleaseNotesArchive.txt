@@ -1,4 +1,7 @@
-﻿v1.0.7:
+﻿v1.0.8: 
+ - Fixed bug incorrectly generating pluginpackage.xml file when no plugin packages are referenced.
+
+v1.0.7:
  - Improved support for ManagedIdentities in Plugins
 
 v1.0.6:
