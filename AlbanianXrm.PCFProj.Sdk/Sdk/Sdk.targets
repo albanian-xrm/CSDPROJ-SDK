@@ -44,4 +44,17 @@
 		Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets" 
 		Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets')" 
 	/>
+
+	<Target
+		Name="_SetFileVersionOnSolution"
+		Condition="'$(FileVersion)' != ''"
+		BeforeTargets="Build"
+	>
+		<XmlPoke
+			XmlInputPath="@(_ControlManifestFile)"
+			Query="manifest/control/@version"
+			Value="$(FileVersion)"
+		/>
+		<Message Text="Set Solution version to $(FileVersion)" Importance="high" />
+	</Target>
 </Project>

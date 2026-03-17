@@ -1,2 +1,2 @@
-﻿v1.0.1: 
- - Improved packages documentation and icon
+﻿v1.0.2: 
+ - Update Manifest version by specifying FileVersion property

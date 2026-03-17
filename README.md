@@ -49,7 +49,7 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.1">
+<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.2">
 </Project>
 ```
 
