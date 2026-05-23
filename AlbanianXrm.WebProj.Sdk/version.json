@@ -8,7 +8,7 @@
   },
   "publicReleaseRefSpec": [
     "^refs/heads/main",
-    "^refs/heads/v\\d+(?:\\.\\d+)?$"
+    "^refs/heads/webproj-v-\\d+(?:\\.\\d+)?$"
   ],
   "release" : {
     "tagName" : "webproj-v-{version}",

@@ -8,7 +8,7 @@
   },
   "publicReleaseRefSpec": [
     "^refs/heads/main",
-    "^refs/heads/v\\d+(?:\\.\\d+)?$"
+    "^refs/heads/cdsproj-v-\\d+(?:\\.\\d+)?$"
   ],
   "release" : {
     "tagName" : "cdsproj-v-{version}",

@@ -8,11 +8,11 @@
   },
   "publicReleaseRefSpec": [
     "^refs/heads/main",
-    "^refs/heads/v\\d+(?:\\.\\d+)?$"
+    "^refs/heads/pcfproj-v-\\d+(?:\\.\\d+)?$"
   ],
   "release" : {
-    "tagName" : "cdsproj-v-{version}",
-    "branchName" : "cdsproj-v-{version}",
+    "tagName" : "pcfproj-v-{version}",
+    "branchName" : "pcfproj-v-{version}",
     "versionIncrement" : "build",
     "firstUnstableTag" : "alpha"
   },
