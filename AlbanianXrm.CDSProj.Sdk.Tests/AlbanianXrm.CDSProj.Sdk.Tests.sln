@@ -17,6 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.LinearInputPCF"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.YetAnotherPluginPackage", "AlbanianXrm.YetAnotherPluginPackage\AlbanianXrm.YetAnotherPluginPackage.csproj", "{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "albx_TestSolutionMatrix_NoGit_NoBuildVersion", "albx_TestSolutionMatrix_NoGit_NoBuildVersion\albx_TestSolutionMatrix_NoGit_NoBuildVersion.cdsproj", "{A6A35A4B-8265-4EC1-8A8B-75FC112A0D1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "albx_TestSolutionMatrix_NoGit_WithBuildVersion", "albx_TestSolutionMatrix_NoGit_WithBuildVersion\albx_TestSolutionMatrix_NoGit_WithBuildVersion.cdsproj", "{865CDCF9-E7E5-4AA2-B9B0-7833AB65924A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "albx_TestSolutionMatrix_Git_NoBuildVersion", "albx_TestSolutionMatrix_Git_NoBuildVersion\albx_TestSolutionMatrix_Git_NoBuildVersion.cdsproj", "{0CE16AF6-72D2-414A-B054-3538A53681FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "albx_TestSolutionMatrix_Git_WithBuildVersion", "albx_TestSolutionMatrix_Git_WithBuildVersion\albx_TestSolutionMatrix_Git_WithBuildVersion.cdsproj", "{701CA52A-BB17-497C-9DDD-E82A4E53BF14}"
+EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "AlbanianXrm.WebResources", "AlbanianXrm.WebResources\AlbanianXrm.WebResources.esproj", "{10226F77-66C9-E044-79AB-8A31EB22D160}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{A7740151-6A5C-40D7-A3F7-1F98959AB756}"
@@ -118,24 +126,6 @@ Global
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Release|x64.Build.0 = Release|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Release|x86.Build.0 = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|x64.Build.0 = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|x64.Deploy.0 = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|x86.Build.0 = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Debug|x86.Deploy.0 = Debug|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|x64.ActiveCfg = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|x64.Build.0 = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|x64.Deploy.0 = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|x86.ActiveCfg = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|x86.Build.0 = Release|Any CPU
-		{10226F77-66C9-E044-79AB-8A31EB22D160}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

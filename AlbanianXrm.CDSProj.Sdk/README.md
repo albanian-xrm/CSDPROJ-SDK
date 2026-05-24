@@ -6,7 +6,7 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.10">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11">
 </Project>
 ```
 
@@ -14,7 +14,7 @@ Reference your plugin packages and PCFs normally using ProjectReference tags.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.10">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
@@ -26,7 +26,40 @@ Reference your plugin packages and PCFs normally using ProjectReference tags.
 </Project>
 ```
 
-The version of the packaged solution and plugins will be read in the `solution.xml` file if the `FileVersion` property is not specified during build.
+## Versioning Behavior
+
+By default, the SDK reads the version from `src/Other/Solution.xml` and uses that value for both the solution version and plugin package version updates.
+
+You can override this behavior in two ways:
+
+1. Pass `FileVersion` during build.
+2. Enable Git-based versioning through Nerdbank.GitVersioning.
+
+When both are used, `FileVersion` wins.
+
+### Enable Git Versioning
+
+To use Nerdbank.GitVersioning for solution/plugin package version stamping, set `EnableGitVersioning` and reference the package:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11">
+	<PropertyGroup>
+		<EnableGitVersioning>true</EnableGitVersioning>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(EnableGitVersioning)' == 'true'">
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.8.118" PrivateAssets="all" />
+	</ItemGroup>
+</Project>
+```
+
+Version resolution order during build:
+
+1. `FileVersion` property (if provided).
+2. Nerdbank.GitVersioning (`GetBuildVersion`) when `EnableGitVersioning=true`.
+3. `src/Other/Solution.xml` fallback.
+
+The version of the packaged solution and plugins follows the precedence above and falls back to `src/Other/Solution.xml` when neither `FileVersion` nor Git versioning is available.
 
 If you want to use [Managed Identities](https://learn.microsoft.com/en-us/power-platform/admin/set-up-managed-identity) then specify the `ManagedIdentityId` property in your plugin package project or in the `ProjectReference`. 
 There is a target that makes sure that the `pluginpackage.xml` is properly regenerated on build.

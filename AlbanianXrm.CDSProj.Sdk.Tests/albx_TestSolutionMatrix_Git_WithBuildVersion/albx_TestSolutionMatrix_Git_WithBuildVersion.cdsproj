@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11-g1f1fcd7e68">
+  <PropertyGroup>
+    <EnableGitVersioning>true</EnableGitVersioning>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(EnableGitVersioning)' == 'true'">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.8.118" PrivateAssets="all" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
     <ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
     <ProjectReference Include="..\AlbanianXrm.YetAnotherPluginPackage\AlbanianXrm.YetAnotherPluginPackage.csproj">
       <ManagedIdentityId>50d2aee4-08c4-4f5d-bb9b-9ce93923da42</ManagedIdentityId>
     </ProjectReference>
-    <ProjectReference Include="..\AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="src\pluginpackages\albx_AlbanianXrm.OtherPluginPackage\package\albx_AlbanianXrm.OtherPluginPackage.nupkg" />
   </ItemGroup>
 </Project>

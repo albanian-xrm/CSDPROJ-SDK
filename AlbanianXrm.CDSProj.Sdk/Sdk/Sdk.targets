@@ -185,18 +185,40 @@
 	</Target>
 
 	<Target
+		Name="_SetFileVersionFromGitVersioning"
+		Condition="'$(FileVersion)' == '' AND '$(EnableGitVersioning)' == 'true'"
+		BeforeTargets="_SetFileVersion"
+	>
+		<MSBuild
+			Projects="$(MSBuildProjectFullPath)"
+			Targets="GetBuildVersion"
+			Properties="EnableGitVersioning=$(EnableGitVersioning);Configuration=$(Configuration);Restore=false"
+			ContinueOnError="WarnAndContinue"
+		>
+			<Output TaskParameter="TargetOutputs" ItemName="_GitBuildVersionItem" />
+		</MSBuild>
+		<PropertyGroup Condition="'@(_GitBuildVersionItem)' != ''">
+			<FileVersion>@(_GitBuildVersionItem)</FileVersion>
+		</PropertyGroup>
+		<Message Text="Set FileVersion from Nerdbank.GitVersioning to $(FileVersion)" Condition="'@(_GitBuildVersionItem)' != ''" Importance="high" />
+		<Warning Text="EnableGitVersioning is true but Git build version is empty. Falling back to Solution.xml version." Condition="'@(_GitBuildVersionItem)' == ''" />
+	</Target>
+
+	<Target
 		Name="_SetFileVersion"
-		Condition="'$(FileVersion)' == ''"
-		BeforeTargets="_CalculateDataversePluginsPackageId;_CalculateDataversePluginsPath;CopyPluginPackages;CleanPlugins;RestorePlugins;PackPlugins"
+		Condition="'$(EnableGitVersioning)' != 'true' OR '$(NerdbankGitVersioningTasksPath)' != ''"
+		DependsOnTargets="_SetFileVersionFromGitVersioning"
+		BeforeTargets="Build;PackPlugins;CopyPluginPackages"
 	>
 		<XmlPeek
 			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
 			Query="ImportExportXml/SolutionManifest/Version/text()"
+			Condition="'$(FileVersion)' == ''"
 		>
 			<Output TaskParameter="Result" ItemName="SolutionVersion" />
 		</XmlPeek>
-		<Message Text="Solution version @(SolutionVersion)" Importance="high" />
-		<PropertyGroup>
+		<Message Text="Solution version @(SolutionVersion)" Condition="'$(FileVersion)' == ''" Importance="high" />
+		<PropertyGroup Condition="'$(FileVersion)' == ''">
 			<FileVersion>@(SolutionVersion)</FileVersion>
 			<_ReadFileVersionFromSolution>true</_ReadFileVersionFromSolution>
 		</PropertyGroup>
@@ -205,7 +227,7 @@
 	<Target
 		Name="_SetFileVersionOnSolution"
 		Condition="'$(FileVersion)' != '' AND '$(_ReadFileVersionFromSolution)' != 'true'"
-		BeforeTargets="_CalculateDataversePluginsPackageId;_CalculateDataversePluginsPath;CopyPluginPackages;CleanPlugins;RestorePlugins;PackPlugins"
+		BeforeTargets="Build;PackPlugins;CopyPluginPackages"
 	>
 		<XmlPoke
 			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
