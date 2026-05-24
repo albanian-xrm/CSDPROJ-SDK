@@ -61,5 +61,7 @@ Version resolution order during build:
 
 The version of the packaged solution and plugins follows the precedence above and falls back to `src/Other/Solution.xml` when neither `FileVersion` nor Git versioning is available.
 
+## Managed Identities
+
 If you want to use [Managed Identities](https://learn.microsoft.com/en-us/power-platform/admin/set-up-managed-identity) then specify the `ManagedIdentityId` property in your plugin package project or in the `ProjectReference`. 
 There is a target that makes sure that the `pluginpackage.xml` is properly regenerated on build.

@@ -41,6 +41,11 @@ steps:
   inputs:
     solution: 'AlbanianXrm.CDSProj.Sdk.Tests\AlbanianXrm.CDSProj.Sdk.Tests.sln'
 
+- task: PowerShell@2
+  displayName: Run Versioning Matrix Tests
+  inputs:
+    filePath: 'AlbanianXrm.CDSProj.Sdk.Tests/Run-VersioningMatrix.Tests.ps1'
+
 - pwsh: |
     New-Item -ItemType Directory -Force -Path $(Build.ArtifactStagingDirectory)\CDSProj
     $cdsProjPackage =  get-item  AlbanianXrm.CDSProj.Sdk\bin\Debug\AlbanianXrm.CDSProj.Sdk.*.nupkg

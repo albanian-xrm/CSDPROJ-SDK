@@ -84,7 +84,7 @@ function Get-MsbuildPropertyValue {
     )
 
     $arguments = @(
-        "msbuild",
+        "build",
         $ProjectPath,
         "-nologo",
         "-getProperty:$PropertyName"

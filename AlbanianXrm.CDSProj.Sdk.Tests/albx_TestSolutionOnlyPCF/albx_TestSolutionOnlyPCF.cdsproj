@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11-g1f1fcd7e68">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11-g196db8b424">
   <ItemGroup>
     <ProjectReference Include="..\AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj" />
   </ItemGroup>
