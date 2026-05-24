@@ -1,4 +1,9 @@
-﻿v1.0.9: 
+﻿v1.0.10: 
+ - Solution Version is shown when packing solution.
+ - Avoids appending Publisher Prefix to already prefixed Plugin Package 
+ - thanks Reza Niroomand (Microsoft MVP, @rezanid) for finding these issues and issuing a PR with the fixes. 
+
+v1.0.9: 
  - Fixed bug with plugin package not getting the right version sometimes (ex. 1.0.1.0 would throw).
  - AppendTargetFrameworkToOutputPath set to false by default to preserve paths same as MS Package.
  

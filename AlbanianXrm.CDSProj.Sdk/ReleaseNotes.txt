@@ -1,4 +1,3 @@
-﻿v1.0.10: 
- - Solution Version is shown when packing solution.
- - Avoids appending Publisher Prefix to already prefixed Plugin Package 
- - thanks Reza Niroomand (Microsoft MVP, @rezanid) for finding these issues and issuing a PR with the fixes. 
+﻿v1.0.11: 
+ - Added support for Nerdbank.GitVersioning
+ - thanks Reza Niroomand (Microsoft MVP, @rezanid) for issuing a PR with the new feature. 
