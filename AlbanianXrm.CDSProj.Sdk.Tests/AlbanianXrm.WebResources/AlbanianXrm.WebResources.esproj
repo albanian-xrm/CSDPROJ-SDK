@@ -1,4 +1,4 @@
-<Project Sdk="AlbanianXrm.WebProj.Sdk/1.0.0-g196db8b424">
+<Project Sdk="AlbanianXrm.WebProj.Sdk/1.0.0">
   <PropertyGroup>
     <!--<StartupCommand>npm run dev</StartupCommand>
     <JavaScriptTestRoot>src\</JavaScriptTestRoot>

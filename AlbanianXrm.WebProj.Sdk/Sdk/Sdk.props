@@ -4,6 +4,8 @@
   
   Licensed under the MIT license.
 -->
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.5550578">
+<Project 
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003" 
+  Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.5550578">
 	
 </Project>

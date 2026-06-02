@@ -30,9 +30,8 @@
 	<ItemGroup>
 		<PackageReference Include="Nerdbank.GitVersioning" Condition="!Exists('packages.config')">
 			<PrivateAssets>all</PrivateAssets>
-			<Version>3.*</Version>
+			<Version Condition="'$(ManagePackageVersionsCentrally)'!='true'">3.*</Version>
 		</PackageReference>
-  		<PackageReference Include="Microsoft.Build.NoTargets" Version="3.7.56" />
 	</ItemGroup>
 
 	<Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">

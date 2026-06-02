@@ -1,0 +1,13 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="Microsoft.PowerApps.MSBuild.Solution" Version="2.8.1" />
+        <PackageVersion Include="Microsoft.CrmSdk.CoreAssemblies" Version="9.0.2.60" />
+        <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
+        <PackageVersion Include="Microsoft.PowerApps.MSBuild.Plugin" Version="2.8.1" />
+        <PackageVersion Include="Microsoft.PowerApps.MSBuild.Pcf" Version="2.8.1" />
+    </ItemGroup>
+</Project>

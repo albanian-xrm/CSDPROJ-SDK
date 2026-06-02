@@ -6,7 +6,7 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.12">
 </Project>
 ```
 
@@ -14,7 +14,7 @@ Reference your plugin packages and PCFs normally using ProjectReference tags.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.12">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
@@ -38,7 +38,7 @@ Example Git versioning setup:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.11">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.12">
 	<PropertyGroup>
 		<EnableGitVersioning>true</EnableGitVersioning>
 	</PropertyGroup>
@@ -49,6 +49,8 @@ Example Git versioning setup:
 ```
 
 The version of the packaged solution and plugins follows the precedence above and falls back to `src/Other/Solution.xml` when neither `FileVersion` nor Git versioning is available.
+
+## Managed Identities
 
 If you want to use [Managed Identities](https://learn.microsoft.com/en-us/power-platform/admin/set-up-managed-identity) then specify the `ManagedIdentityId` property in your plugin package project or in the `ProjectReference`. 
 There is a target that makes sure that the `pluginpackage.xml` is properly regenerated on build.
@@ -71,7 +73,7 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.2">
+<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.3">
 </Project>
 ```
 

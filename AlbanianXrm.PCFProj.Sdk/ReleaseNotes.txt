@@ -1,2 +1,2 @@
-﻿v1.0.2: 
- - Update Manifest version by specifying FileVersion property
+﻿v1.0.3: 
+ - Added support for Directory.props global package versioning
