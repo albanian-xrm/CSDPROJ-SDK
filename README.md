@@ -6,15 +6,18 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.12">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.13">
 </Project>
 ```
+
+After your project references our SDK then you can add it as part of your visual studio solution with the `dotnet sln YourSolution.sln add "path to your .cdsproj file"`
+
 
 Reference your plugin packages and PCFs normally using ProjectReference tags.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.12">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.13">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
@@ -38,7 +41,7 @@ Example Git versioning setup:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.12">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.13">
 	<PropertyGroup>
 		<EnableGitVersioning>true</EnableGitVersioning>
 	</PropertyGroup>
@@ -73,7 +76,8 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.3">
+<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.4">
 </Project>
 ```
 
+After your project references our SDK then you can add it as part of your visual studio solution with the `dotnet sln YourSolution.sln add "path to your .pcfproj file"`

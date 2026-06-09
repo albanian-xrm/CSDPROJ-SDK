@@ -50,6 +50,32 @@
 	/>
 
 	<Target
+		Name="_SetFileVersionFromGitVersioning"
+		Condition="'$(FileVersion)' == '' AND '$(EnableGitVersioning)' == 'true'"
+		BeforeTargets="_SetFileVersionOnSolution"
+	>
+		<MSBuild
+			Projects="$(MSBuildProjectFullPath)"
+			Targets="GetBuildVersion"
+			Properties="EnableGitVersioning=$(EnableGitVersioning);Configuration=$(Configuration);Restore=false"
+			ContinueOnError="WarnAndContinue"
+		>
+			<Output TaskParameter="TargetOutputs" ItemName="_GitBuildVersionItem" />
+		</MSBuild>
+		<PropertyGroup Condition="'@(_GitBuildVersionItem)' != ''">
+			<FileVersion>@(_GitBuildVersionItem)</FileVersion>
+		</PropertyGroup>
+		<XmlPoke
+		    Condition="'@(_GitBuildVersionItem)' != ''"
+			XmlInputPath="@(_ControlManifestFile)"
+			Query="manifest/control/@version"
+			Value="$(FileVersion)"
+		/>
+		<Message Text="Set FileVersion from Nerdbank.GitVersioning to $(FileVersion)" Condition="'@(_GitBuildVersionItem)' != ''" Importance="high" />
+		<Warning Text="EnableGitVersioning is true but Git build version is empty. Falling back to Solution.xml version." Condition="'@(_GitBuildVersionItem)' == ''" />
+	</Target>
+
+	<Target
 		Name="_SetFileVersionOnSolution"
 		Condition="'$(FileVersion)' != ''"
 		BeforeTargets="Build"

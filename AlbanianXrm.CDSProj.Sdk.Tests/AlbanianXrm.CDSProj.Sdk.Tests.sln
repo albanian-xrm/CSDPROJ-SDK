@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.PluginPackage",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.OtherPluginPackage", "AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj", "{8DB6AA66-8BD8-2E01-303C-CAD5E9BE2AC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.LinearInputPCF", "AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj", "{7A3744CB-7515-47E3-AD37-3EDF2A49B115}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbanianXrm.YetAnotherPluginPackage", "AlbanianXrm.YetAnotherPluginPackage\AlbanianXrm.YetAnotherPluginPackage.csproj", "{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "albx_TestSolutionMatrix_NoGit_NoBuildVersion", "albx_TestSolutionMatrix_NoGit_NoBuildVersion\albx_TestSolutionMatrix_NoGit_NoBuildVersion.cdsproj", "{A6A35A4B-8265-4EC1-8A8B-75FC112A0D1A}"
@@ -31,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlbanianXrm.LinearInputPCF", "AlbanianXrm.LinearInputPCF\AlbanianXrm.LinearInputPCF.pcfproj", "{02A1026F-B40C-42A6-A30D-3997684D7476}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,18 +102,6 @@ Global
 		{8DB6AA66-8BD8-2E01-303C-CAD5E9BE2AC6}.Release|x64.Build.0 = Release|Any CPU
 		{8DB6AA66-8BD8-2E01-303C-CAD5E9BE2AC6}.Release|x86.ActiveCfg = Release|Any CPU
 		{8DB6AA66-8BD8-2E01-303C-CAD5E9BE2AC6}.Release|x86.Build.0 = Release|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Debug|x64.Build.0 = Debug|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Debug|x86.Build.0 = Debug|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Release|x64.ActiveCfg = Release|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Release|x64.Build.0 = Release|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Release|x86.ActiveCfg = Release|Any CPU
-		{7A3744CB-7515-47E3-AD37-3EDF2A49B115}.Release|x86.Build.0 = Release|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -126,6 +114,18 @@ Global
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Release|x64.Build.0 = Release|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{10BA6A05-48A6-4355-FF47-C0F8DBE5B0B9}.Release|x86.Build.0 = Release|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Debug|x64.Build.0 = Debug|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Debug|x86.Build.0 = Debug|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Release|x64.ActiveCfg = Release|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Release|x64.Build.0 = Release|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Release|x86.ActiveCfg = Release|Any CPU
+		{02A1026F-B40C-42A6-A30D-3997684D7476}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

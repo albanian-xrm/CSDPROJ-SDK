@@ -6,6 +6,8 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.3">
+<Project Sdk="AlbanianXrm.PCFProj.Sdk/1.0.4">
 </Project>
 ```
+
+After your project references our SDK then you can add it as part of your visual studio solution with the `dotnet sln YourSolution.sln add "path to your .pcfproj file"`
