@@ -1,0 +1,8 @@
+{
+    "name": "@albanian-xrm/ppsdk-webproj",
+    "devDependencies": {
+        "vite": "^8.0.0",
+        "@vitejs/plugin-react": "^6.0.0",
+        "typescript":"^5.0.0"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "AlbanianXrm",
+    "classifications": ["AlbanianXrm", "PowerPlatform", "WebResource" ],
+    "identity": "AlbanianXrm.PowerPlatform.Templates.WebResource",
+    "name": "Dataverse WebResources Template",
+    "shortName": "dv-wr",
+    "tags": {
+      "language": "TypeScript",
+      "type": "project"
+    },
+    "sourceName": "SolutionTemplate",
+    "preferNameDirectory": true
+}

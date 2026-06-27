@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/Nerdbank.GitVersioning/main/src/NerdBank.GitVersioning/version.schema.json",
+  "version": "1.0.0",
+  "pathFilters": ["."],
+  "nugetPackageVersion": {
+     "semVer": 1 ,
+     "precision": "build"
+  },
+  "publicReleaseRefSpec": [
+    "^refs/heads/main",
+    "^refs/heads/pp-v-\\d+(?:\\.\\d+)?$"
+  ],
+  "release" : {
+    "tagName" : "pp-v-{version}",
+    "branchName" : "pp-v-{version}",
+    "versionIncrement" : "build",
+    "firstUnstableTag" : "alpha"
+  },
+  "cloudBuild": {
+    "buildNumber": {
+      "enabled": true
+    }
+  }
+}

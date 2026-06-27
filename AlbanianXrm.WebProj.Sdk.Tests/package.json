@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "@albanianxrm/webproj.sdk.tests",
+  "version": "1.0.0",
+  "author": "AlbanianXrm <albanian@xrm.al>",
+  "workspaces": [
+    "vite-multientry-lib"
+  ]
+}

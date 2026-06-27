@@ -1,0 +1,30 @@
+{
+  "name": "vite-multientry-lib",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "PublisherPrefix=albx ExcludedFromClientGlobalContextJs=\"albx__dashboards_contact.360\" vite build && PublisherName=AlbanianXrm PublisherPrefix=albx rolldown -c rolldown.config.ts",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^26.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/xrm": "^9.0.94",
+    "@vitejs/plugin-react": "^6.0.3",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "glob": "^13.0.6",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.0",
+    "vite-plugin-virtual-mpa": "^1.12.1"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}
