@@ -1,4 +1,7 @@
-﻿v1.0.12: 
+﻿v1.0.13: 
+ - Added default project type which enables .cdsproj to be added using the following command `dotnet sln mySolution.sln add ...`
+
+v1.0.12: 
  - Added support for Directory.props global package versioning
 
 v1.0.11: 

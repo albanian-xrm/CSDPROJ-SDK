@@ -46,7 +46,7 @@ To use Nerdbank.GitVersioning for solution/plugin package version stamping, set 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.13">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.14">
 	<PropertyGroup>
 		<EnableGitVersioning>true</EnableGitVersioning>
 	</PropertyGroup>
