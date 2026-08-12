@@ -5,6 +5,13 @@
   Licensed under the MIT license.
 -->
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath Condition="'$(AppendTargetFrameworkToOutputPath)' == ''">false</AppendTargetFrameworkToOutputPath>
+		<TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''">v4.6.2</TargetFrameworkVersion>
+		<!--Remove TargetFramework when this is available in 16.1-->
+		<TargetFramework Condition="'$(TargetFramework)' == ''">net462</TargetFramework>
+		<SolutionRootPath Condition="'$(SolutionRootPath)' == ''">src</SolutionRootPath>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.PowerApps.MSBuild.Solution" >
@@ -29,9 +36,9 @@
 		<None Include="./**" Exclude="@(ExcludeDirectories)" />
 		<None Remove="@(ExcludeDirectories)" />
 		<None Remove=".vs/**" />
-		<None Remove="$(SolutionRootPath)/**" />
+		<None Condition="'$(DataverseSolutionLinkPath)' != ''" Remove="$(SolutionRootPath)/**" />
 		<None Include="$(SolutionRootPath)/**">
-			<Link>Dataverse Solution\%(RecursiveDir)/%(FileName)%(Extension)</Link>
+			<Link>$(DataverseSolutionLinkPath)/%(RecursiveDir)/%(FileName)%(Extension)</Link>
 		</None>
 		<None Remove="bin\**" />
 		<Content Include="$(SolutionPackageZipFilePath)">
@@ -40,6 +47,14 @@
 		<Content Remove="@(ExcludeDirectories)" />
 		<Content Remove="bin\**" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="$(SolutionRootPath)/**" />
+		<!-- TODO: <UpToDateCheckInput Include="Map File mappings" /> -->
+		<UpToDateCheckBuilt Include="$(SolutionPackageZipFilePath)" />
+	</ItemGroup>
+
+	<Import Project="./Shared.targets/NoAssembly.targets" />
 
 	<Target Name="CopyPluginPackages"
 			Outputs="%(DataversePluginPackage.Identity)"

@@ -49,6 +49,13 @@
 		Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets')" 
 	/>
 
+	<ItemGroup>
+		<UpToDateCheckInput Include="@(None)" />
+		<UpToDateCheckBuilt Include="$(OutputPath)/**/*" />
+	</ItemGroup>
+
+	<Import Project="./Shared.targets/NoAssembly.targets" />
+
 	<Target
 		Name="_SetFileVersionFromGitVersioning"
 		Condition="'$(FileVersion)' == '' AND '$(EnableGitVersioning)' == 'true'"

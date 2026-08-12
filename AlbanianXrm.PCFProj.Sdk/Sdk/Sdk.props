@@ -4,7 +4,7 @@
   
   Licensed under the MIT license.
 -->
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.Build.NoTargets/3.7.56">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
 		<PowerAppsTargetsPath Condition="'$(PowerAppsTargetsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
 	</PropertyGroup>
@@ -21,4 +21,6 @@
 		<TargetFramework Condition="'$(TargetFramework)' == ''">net462</TargetFramework>
 		<SolutionRootPath Condition="'$(SolutionRootPath)' == ''">src</SolutionRootPath>
 	</PropertyGroup>
+
+	<Import Project="./Shared.props/NoAssembly.props" />
 </Project>
