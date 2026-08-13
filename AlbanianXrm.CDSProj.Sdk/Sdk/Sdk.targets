@@ -23,35 +23,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ExcludeDirectories Include=".vs" />
+		<ExcludeDirectories Include=".vs\**" />
 		<ExcludeDirectories Include=".gitignore" />
 		<ExcludeDirectories Include="bin\**" />
 		<ExcludeDirectories Include="obj\**" />
 		<ExcludeDirectories Include="*.cdsproj" />
 		<ExcludeDirectories Include="*.cdsproj.user" />
 		<ExcludeDirectories Include="*.sln" />
+		<ExcludeDirectories Include="*.slnx" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="./**" Exclude="@(ExcludeDirectories)" />
+		<Resource Include="./**" Exclude="@(ExcludeDirectories)" CopyToOutputDirectory="Never" />
 		<None Remove="@(ExcludeDirectories)" />
-		<None Remove=".vs/**" />
-		<None Condition="'$(DataverseSolutionLinkPath)' != ''" Remove="$(SolutionRootPath)/**" />
-		<None Include="$(SolutionRootPath)/**">
+		<Resource Update="$(SolutionRootPath)/**" Condition="'$(DataverseSolutionLinkPath)' != ''">
 			<Link>$(DataverseSolutionLinkPath)/%(RecursiveDir)/%(FileName)%(Extension)</Link>
-		</None>
-		<None Remove="bin\**" />
-		<Content Include="$(SolutionPackageZipFilePath)">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		</Resource>
+		<Resource Remove="@(ExcludeDirectories)" />
 		<Content Remove="@(ExcludeDirectories)" />
-		<Content Remove="bin\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<UpToDateCheckInput Include="$(SolutionRootPath)/**" />
-		<!-- TODO: <UpToDateCheckInput Include="Map File mappings" /> -->
-		<UpToDateCheckBuilt Include="$(SolutionPackageZipFilePath)" />
+		<!-- TODO: Include="Map File mappings" as Linked Resources so that these participate in AccelerateBuildsInVisualStudio -->
+		<UpToDateCheckOutput Include="$(SolutionPackageZipFilePath)" />
 	</ItemGroup>
 
 	<Import Project="./Shared.targets/NoAssembly.targets" />
@@ -64,15 +58,16 @@
 			<_PluginPackageName Condition="$([System.String]::new('%(DataversePluginPackage.DataversePluginPackageId)').StartsWith('$(PublisherPrefix)_'))">%(DataversePluginPackage.DataversePluginPackageId)</_PluginPackageName>
 			<_PluginPackageName Condition="!$([System.String]::new('%(DataversePluginPackage.DataversePluginPackageId)').StartsWith('$(PublisherPrefix)_'))">$(PublisherPrefix)_%(DataversePluginPackage.DataversePluginPackageId)</_PluginPackageName>
 
-			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'!=''">
+			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'!=''">%(DataversePluginPackage.ManagedIdentityId)</_ManagedIdentityId>
+			<_ManagedIdentityIdXml Condition="'%(DataversePluginPackage.ManagedIdentityId)'!=''">
   &lt;managedidentityid&gt;
     &lt;managedidentityid&gt;%(DataversePluginPackage.ManagedIdentityId)&lt;/managedidentityid&gt;
-  &lt;/managedidentityid&gt;</_ManagedIdentityId>
-			<_ManagedIdentityId Condition="'%(DataversePluginPackage.ManagedIdentityId)'==''"></_ManagedIdentityId>
+  &lt;/managedidentityid&gt;</_ManagedIdentityIdXml>
+			<_ManagedIdentityIdXml Condition="'%(DataversePluginPackage.ManagedIdentityId)'==''"></_ManagedIdentityIdXml>
 
 			<_PluginPackageXml>&lt;pluginpackage uniquename=&quot;$(_PluginPackageName)&quot;&gt;
   &lt;exportkeyversion&gt;1&lt;/exportkeyversion&gt;
-  &lt;iscustomizable&gt;1&lt;/iscustomizable&gt;$(_ManagedIdentityId)
+  &lt;iscustomizable&gt;1&lt;/iscustomizable&gt;$(_ManagedIdentityIdXml)
   &lt;name&gt;$(_PluginPackageName)&lt;/name&gt;
   &lt;package mimetype=&quot;application/octet-stream&quot;&gt;$(_PluginPackageName).nupkg&lt;/package&gt;
   &lt;statecode&gt;0&lt;/statecode&gt;
@@ -88,11 +83,41 @@
 			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!=''"
 			OverwriteReadOnlyFiles="true" />
 
+		<XmlPeek 
+			
+			XmlInputPath="$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml"
+			Query="/pluginpackage/version/text()"
+			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!='' AND Exists('$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml')"
+		>
+			<Output TaskParameter="Result" ItemName="ExistingPluginPackageVersion" />
+		</XmlPeek>
+
+		<XmlPeek 
+			
+			XmlInputPath="$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml"
+			Query="/pluginpackage/managedidentityid/managedidentityid/text()"
+			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!='' AND Exists('$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml')"
+		>
+			<Output TaskParameter="Result" ItemName="ExistingManagedIdentityId" />
+		</XmlPeek>
+
 		<WriteLinesToFile
 			File="$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml"
 			Overwrite="true"
-			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!=''"
+			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!='' AND !Exists('$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml')"
 			Lines="$(_PluginPackageXml)" />
+
+		<XmlPoke
+			XmlInputPath="$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml"
+			Query="/pluginpackage/version"
+			Value="$(FileVersion)"
+			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!='' AND Exists('$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml') AND '@(ExistingPluginPackageVersion)' != '$(FileVersion)'" />
+
+		<XmlPoke
+			XmlInputPath="$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml"
+			Query="/pluginpackage/managedidentityid"
+			Value="&lt;managedidentityid&gt;%(DataversePluginPackage.ManagedIdentityId)&lt;/managedidentityid&gt;"
+			Condition="'%(DataversePluginPackage.DataversePluginPackageId)'!='' AND Exists('$(SolutionRootPath)\pluginpackages\$(_PluginPackageName)\pluginpackage.xml') AND '@(ExistingManagedIdentityId)' != '$(_ManagedIdentityId)'" />
 	</Target>
 
 	<Target
@@ -248,8 +273,16 @@
 		Condition="'$(FileVersion)' != '' AND '$(_ReadFileVersionFromSolution)' != 'true'"
 		BeforeTargets="Build;PackPlugins;CopyPluginPackages"
 	>
+		<XmlPeek
+			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
+			Query="ImportExportXml/SolutionManifest/Version/text()"
+		>
+			<Output TaskParameter="Result" ItemName="CurrentSolutionVersion" />
+		</XmlPeek>
+
 		<XmlPoke
 			XmlInputPath="$(SolutionRootPath)\Other\Solution.xml"
+			Condition="'@(CurrentSolutionVersion)' != '$(FileVersion)'"
 			Query="ImportExportXml/SolutionManifest/Version"
 			Value="$(FileVersion)"
 		/>

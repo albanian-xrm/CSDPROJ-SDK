@@ -6,7 +6,7 @@ To use this just reference the Sdk using a specific version and the build system
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.14">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.15">
 </Project>
 ```
 
@@ -17,7 +17,7 @@ Reference your plugin packages and PCFs normally using ProjectReference tags.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.14">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.15">
 	<ItemGroup>
 		<ProjectReference Include="..\AlbanianXrm.OtherPluginPackage\AlbanianXrm.OtherPluginPackage.csproj" />
 		<ProjectReference Include="..\AlbanianXrm.PluginPackage\AlbanianXrm.PluginPackage.csproj" />
@@ -46,7 +46,7 @@ To use Nerdbank.GitVersioning for solution/plugin package version stamping, set 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.14">
+<Project Sdk="AlbanianXrm.CDSProj.Sdk/1.0.15">
 	<PropertyGroup>
 		<EnableGitVersioning>true</EnableGitVersioning>
 	</PropertyGroup>

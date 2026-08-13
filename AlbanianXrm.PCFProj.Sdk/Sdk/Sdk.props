@@ -14,12 +14,15 @@
 	<PropertyGroup>
 		<DefaultProjectTypeGuid>FAE04EC0-301F-11D3-BF4B-00C04F79EFBC</DefaultProjectTypeGuid>
 		<ProjectTypeGuids>$(DefaultProjectTypeGuid);$(ProjectTypeGuids)</ProjectTypeGuids>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendTargetFrameworkToOutputPath Condition="'$(AppendTargetFrameworkToOutputPath)' == ''">false</AppendTargetFrameworkToOutputPath>
 		<OutputPath Condition="'$(OutputPath)' == ''">$(MSBuildProjectDirectory)\out\controls</OutputPath>
 		<TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''">v4.6.2</TargetFrameworkVersion>
 		<!--Remove TargetFramework when this is available in 16.1-->
 		<TargetFramework Condition="'$(TargetFramework)' == ''">net462</TargetFramework>
-		<SolutionRootPath Condition="'$(SolutionRootPath)' == ''">src</SolutionRootPath>
+		<AccelerateBuildsInVisualStudio Condition="'$(AccelerateBuildsInVisualStudio)' == ''">true</AccelerateBuildsInVisualStudio>
+		<DebugSymbols Condition="'$(DebugSymbols)' == ''">false</DebugSymbols>
+		<DebugType Condition="'$(DebugType)' == ''">none</DebugType>
+		<_ExcludeNpmRunBuildInput>$(ExcludeNpmRunBuildInput);node_modules/**</_ExcludeNpmRunBuildInput>
 	</PropertyGroup>
 
 	<Import Project="./Shared.props/NoAssembly.props" />

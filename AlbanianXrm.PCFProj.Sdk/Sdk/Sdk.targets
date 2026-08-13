@@ -7,7 +7,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
 		<PackageReference Include="Microsoft.PowerApps.MSBuild.Pcf" >
-			<Version Condition="'$(ManagePackageVersionsCentrally)'!='true'">2.8.1</Version>
+			<Version Condition="'$(ManagePackageVersionsCentrally)'!='true'">2.11.1</Version>
 		</PackageReference>
 		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All">
 			<Version Condition="'$(ManagePackageVersionsCentrally)'!='true'">1.0.3</Version>
@@ -15,33 +15,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ExcludeDirectories Include=".vs" />
+		<ExcludeDirectories Include="~/**" />
 		<ExcludeDirectories Include=".gitignore" />
-		<ExcludeDirectories Include="bin\**" />
-		<ExcludeDirectories Include="obj\**" />
-		<ExcludeDirectories Include="*.cdsproj" />
-		<ExcludeDirectories Include="*.cdsproj.user" />
-		<ExcludeDirectories Include="*.sln" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ExcludeDirectories Include=".gitignore" />
-		<ExcludeDirectories Include="bin\**" />
-		<ExcludeDirectories Include="obj\**" />
-		<ExcludeDirectories Include="$(OutputPath)\**" />
+		<ExcludeDirectories Include=".vs/**" />
+		<ExcludeDirectories Include="bin/**" />
+		<ExcludeDirectories Include="node_modules/**" />
+		<ExcludeDirectories Include="obj/**" />
+		<ExcludeDirectories Include="$(OutputPath)/**" />
 		<ExcludeDirectories Include="*.pcfproj" />
 		<ExcludeDirectories Include="*.pcfproj.user" />
 		<ExcludeDirectories Include="*.sln" />
-		<ExcludeDirectories Include="node_modules\**" />
+		<ExcludeDirectories Include="*.slnx" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="./**" Exclude="@(ExcludeDirectories)" />
+		<PCFProjectManifestFile Include="**/ControlManifest.Input.xml" Exclude="@(ExcludeDirectories)" />
+		<UpToDateCheckOutput Include="@(PCFProjectManifestFile->'$(OutputPath)%(RelativeDir)bundle.js')" />
+		<UpToDateCheckOutput Include="@(PCFProjectManifestFile->'$(OutputPath)%(RelativeDir)ControlManifest.xml')" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="**" Exclude="@(ExcludeDirectories);**/generated/*.ts" CopyToOutputDirectory="Never" />
 		<None Remove="@(ExcludeDirectories)" />
-		<None Remove=".vs/**" />	
-		<None Remove="bin\**" />	
 		<Content Remove="@(ExcludeDirectories)" />
-		<Content Remove="bin\**" />
+		<None Include="**/generated/*.ts" Exclude="@(ExcludeDirectories)" />
 	</ItemGroup>
 
 	<Import 
@@ -49,12 +46,15 @@
 		Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.targets')" 
 	/>
 
-	<ItemGroup>
-		<UpToDateCheckInput Include="@(None)" />
-		<UpToDateCheckBuilt Include="$(OutputPath)/**/*" />
-	</ItemGroup>
+
 
 	<Import Project="./Shared.targets/NoAssembly.targets" />
+
+	<Target BeforeTargets="_InitPcfAutoNpmInstall" Name="FixIssueWithNPMWorkspaces">
+		<ItemGroup>
+			<_PcfScriptsPackageFile Remove="@(_PcfScriptsPackageFile)" />
+		</ItemGroup>
+	</Target>
 
 	<Target
 		Name="_SetFileVersionFromGitVersioning"
@@ -72,8 +72,14 @@
 		<PropertyGroup Condition="'@(_GitBuildVersionItem)' != ''">
 			<FileVersion>@(_GitBuildVersionItem)</FileVersion>
 		</PropertyGroup>
+		<XmlPeek
+			XmlInputPath="@(_ControlManifestFile)"
+			Query="manifest/control/@version"
+		>
+			<Output TaskParameter="Result" PropertyName="_CurrentVersion" />
+		</XmlPeek>
 		<XmlPoke
-		    Condition="'@(_GitBuildVersionItem)' != ''"
+		    Condition="'@(_GitBuildVersionItem)' != '' AND '$(_CurrentVersion)' != '$(FileVersion)'"
 			XmlInputPath="@(_ControlManifestFile)"
 			Query="manifest/control/@version"
 			Value="$(FileVersion)"
@@ -87,8 +93,16 @@
 		Condition="'$(FileVersion)' != ''"
 		BeforeTargets="Build"
 	>
+		<XmlPeek
+			XmlInputPath="@(_ControlManifestFile)"
+			Query="manifest/control/@version"
+		>
+			<Output TaskParameter="Result" PropertyName="_CurrentVersion" />
+		</XmlPeek>
+
 		<XmlPoke
 			XmlInputPath="@(_ControlManifestFile)"
+			Condition="'$(_CurrentVersion)' != '$(FileVersion)'"
 			Query="manifest/control/@version"
 			Value="$(FileVersion)"
 		/>

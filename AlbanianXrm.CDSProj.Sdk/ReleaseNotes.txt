@@ -1,2 +1,2 @@
-﻿v1.0.14: 
- - removed Microsoft.Build.NoTargets/3.7.56 dependency. Now applying the same logic using our fork so that we are in control.
+﻿v1.0.15:
+ -  - Enabled AccelerateBuildsInVisualStudio and did some minor related improvements.

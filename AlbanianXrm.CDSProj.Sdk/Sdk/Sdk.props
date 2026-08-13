@@ -10,6 +10,9 @@
 	    <DefaultProjectTypeGuid>FAE04EC0-301F-11D3-BF4B-00C04F79EFBC</DefaultProjectTypeGuid>
 		<ProjectTypeGuids>$(DefaultProjectTypeGuid);$(ProjectTypeGuids)</ProjectTypeGuids>
 		<PowerAppsTargetsPath Condition="'$(PowerAppsTargetsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
+		<AccelerateBuildsInVisualStudio Condition="'$(AccelerateBuildsInVisualStudio)' == ''">true</AccelerateBuildsInVisualStudio>
+		<DebugSymbols Condition="'$(DebugSymbols)' == ''">false</DebugSymbols>
+		<DebugType Condition="'$(DebugType)' == ''">none</DebugType>
 	</PropertyGroup>
 
 	<Import Project="./Shared.props/NoAssembly.props" />

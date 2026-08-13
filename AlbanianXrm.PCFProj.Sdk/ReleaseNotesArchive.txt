@@ -1,4 +1,7 @@
-﻿v1.0.4: 
+﻿v1.0.5:
+ - removed Microsoft.Build.NoTargets/3.7.56 dependency. Now applying the same logic using our fork so that we are in control.
+
+v1.0.4: 
  - Added default project type which enables .pcfproj to be added using the following command `dotnet sln mySolution.sln add ...`
 
 v1.0.3: 

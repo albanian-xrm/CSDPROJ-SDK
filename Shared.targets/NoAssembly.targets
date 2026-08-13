@@ -43,7 +43,7 @@
 		<DebugSymbols>false</DebugSymbols>
 		
 		<!-- Don't emit a reference assembly -->
-		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+		<ProduceReferenceAssembly Condition="'$(ProduceReferenceAssembly)' == ''">false</ProduceReferenceAssembly>
 	</PropertyGroup>
 
 	<!-- Clear output group items which are read by the IDE and NuGet. -->
