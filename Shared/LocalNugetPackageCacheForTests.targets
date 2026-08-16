@@ -1,0 +1,63 @@
+<Project>
+    <Target 
+        AfterTargets="Pack"
+        Name="ClearLocalNugetPackageCache"
+    >
+        <Exec 
+            Command="dotnet nuget locals global-packages -l" 
+            ConsoleToMsBuild="true"
+            StandardOutputImportance="Low"
+        >
+            <Output TaskParameter="ConsoleOutput" PropertyName="NugetGlobalPackagesPath" />
+        </Exec> 
+        <PropertyGroup>
+            <NugetGlobalPackagesPath>$(NugetGlobalPackagesPath.TrimStart("global-packages: "))</NugetGlobalPackagesPath>
+        </PropertyGroup>
+        <ItemGroup>
+            <ExistingNugetPackages Include="$(NugetGlobalPackagesPath)AlbanianXrm.CDSProj.Sdk\**" />
+            <ExistingNugetPackages Include="$(NugetGlobalPackagesPath)AlbanianXrm.PCFProj.Sdk\**" />
+            <ExistingNugetPackages Include="$(NugetGlobalPackagesPath)AlbanianXrm.WebProj.Sdk\**" />
+        </ItemGroup>
+        <Message 
+            Condition="Exists('%(ExistingNugetPackages.Identity)')"
+            Text="Deleting '%(ExistingNugetPackages.Identity)' from local NuGet package cache."
+            Importance="High"
+        />
+        <Delete 
+            Condition="Exists('%(ExistingNugetPackages.Identity)')"
+            Files="%(ExistingNugetPackages.Identity)"
+        />
+        <PropertyGroup>
+            <NuGetConfigContent><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <clear />
+        <add key="AlbanianXrm.CDSProj.Sdk" value="$([System.IO.Path]::Combine('..','AlbanianXrm.CDSProj.Sdk','bin',$(Configuration)))" />
+        <add key="AlbanianXrm.PCFProj.Sdk" value="$([System.IO.Path]::Combine('..','AlbanianXrm.PCFProj.Sdk','bin',$(Configuration)))" />
+        <add key="AlbanianXrm.WebProj.Sdk" value="$([System.IO.Path]::Combine('..','AlbanianXrm.WebProj.Sdk','bin',$(Configuration)))" />
+        <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+  </packageSources>
+   <packageSourceMapping>
+        <packageSource key="nuget.org">
+            <package pattern="*" />
+        </packageSource>
+        <packageSource key="AlbanianXrm.CDSProj.Sdk">
+            <package pattern="AlbanianXrm.CDSProj.Sdk" />
+        </packageSource>
+        <packageSource key="AlbanianXrm.PCFProj.Sdk">
+            <package pattern="AlbanianXrm.PCFProj.Sdk" />
+        </packageSource>
+         <packageSource key="AlbanianXrm.WebProj.Sdk">
+            <package pattern="AlbanianXrm.WebProj.Sdk" />
+        </packageSource>
+    </packageSourceMapping>
+</configuration>]]></NuGetConfigContent>
+        </PropertyGroup>
+        <WriteLinesToFile
+            File="..\AlbanianXrm.CDSProj.Sdk.Tests\nuget.config"
+            Lines="$(NuGetConfigContent)"
+            Overwrite="true"
+        />
+
+    </Target>
+</Project>

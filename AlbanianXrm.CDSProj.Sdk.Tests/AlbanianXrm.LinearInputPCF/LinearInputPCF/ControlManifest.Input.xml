@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
-  <control namespace="AlbanianXrm" constructor="LinearInputPCF" version="1.2.10.17531" display-name-key="LinearInputPCF" description-key="LinearInputPCF description" control-type="standard">
+  <control namespace="AlbanianXrm" constructor="LinearInputPCF" version="1.2.11.30218" display-name-key="LinearInputPCF" description-key="LinearInputPCF description" control-type="standard">
     <type-group name="numbers">
       <type>Whole.None</type>
       <type>Currency</type>

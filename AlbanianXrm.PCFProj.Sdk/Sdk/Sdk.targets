@@ -48,7 +48,7 @@
 
 
 
-	<Import Project="./Shared.targets/NoAssembly.targets" />
+	<Import Project="./Shared/NoAssembly.targets" />
 
 	<Target BeforeTargets="_InitPcfAutoNpmInstall" Name="FixIssueWithNPMWorkspaces">
 		<ItemGroup>

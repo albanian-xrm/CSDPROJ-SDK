@@ -15,7 +15,7 @@
 		<DebugType Condition="'$(DebugType)' == ''">none</DebugType>
 	</PropertyGroup>
 
-	<Import Project="./Shared.props/NoAssembly.props" />
+	<Import Project="./Shared/NoAssembly.props" />
 
 	<Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.props')" />
 </Project>

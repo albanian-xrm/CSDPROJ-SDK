@@ -25,5 +25,5 @@
 		<_ExcludeNpmRunBuildInput>$(ExcludeNpmRunBuildInput);node_modules/**</_ExcludeNpmRunBuildInput>
 	</PropertyGroup>
 
-	<Import Project="./Shared.props/NoAssembly.props" />
+	<Import Project="./Shared/NoAssembly.props" />
 </Project>

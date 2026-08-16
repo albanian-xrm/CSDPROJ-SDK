@@ -1,0 +1,26 @@
+<Project>
+    <Target 
+        AfterTargets="Pack"
+        Inputs="@(Content);version.json"
+        Name="UpdateTestProjectReferences" 
+        Outputs="%(TestProjectReference.Identity)"
+    >
+        <XmlPeek 
+            Query="Project/@Sdk"
+            XmlInputPath="%(TestProjectReference.Identity)"
+        >
+            <Output TaskParameter="Result" ItemName="_TestProjectSdk" />
+        </XmlPeek>
+		<XmlPoke
+            Condition="'$(_TestProjectSdk)' != '$(MSBuildProjectName)/$(Version)'"
+			Query="Project/@Sdk"
+			Value="$(MSBuildProjectName)/$(Version)"
+			XmlInputPath="%(TestProjectReference.Identity)"
+		/>
+		<Message 
+            Condition="'$(_TestProjectSdk)' != '$(MSBuildProjectName)/$(Version)'"
+            Importance="high" 
+            Text="Set $(MSBuildProjectName) version to $(Version) for %(TestProjectReference.Identity)" 
+        />
+	</Target>
+</Project>

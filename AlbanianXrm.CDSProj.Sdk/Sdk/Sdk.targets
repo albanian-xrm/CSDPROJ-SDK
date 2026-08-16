@@ -48,7 +48,7 @@
 		<UpToDateCheckOutput Include="$(SolutionPackageZipFilePath)" />
 	</ItemGroup>
 
-	<Import Project="./Shared.targets/NoAssembly.targets" />
+	<Import Project="./Shared/NoAssembly.targets" />
 
 	<Target Name="CopyPluginPackages"
 			Outputs="%(DataversePluginPackage.Identity)"

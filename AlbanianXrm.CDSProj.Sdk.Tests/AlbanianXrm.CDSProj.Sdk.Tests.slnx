@@ -1,0 +1,26 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Configurations/">
+    <File Path="nuget.config" />
+  </Folder>
+  <Project Path="AlbanianXrm.LinearInputPCF/AlbanianXrm.LinearInputPCF.pcfproj" Type="C#" />
+  <Project Path="AlbanianXrm.OtherPluginPackage/AlbanianXrm.OtherPluginPackage.csproj" />
+  <Project Path="AlbanianXrm.PluginPackage/AlbanianXrm.PluginPackage.csproj" />
+  <Project Path="AlbanianXrm.WebResources/AlbanianXrm.WebResources.esproj">
+    <Platform Project="AnyCPU" />
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="AlbanianXrm.YetAnotherPluginPackage/AlbanianXrm.YetAnotherPluginPackage.csproj" />
+  <Project Path="albx_TestSolution/albx_TestSolution.cdsproj" Type="C#" />
+  <Project Path="albx_TestSolutionMatrix_Git_NoBuildVersion/albx_TestSolutionMatrix_Git_NoBuildVersion.cdsproj" Type="C#" />
+  <Project Path="albx_TestSolutionMatrix_Git_WithBuildVersion/albx_TestSolutionMatrix_Git_WithBuildVersion.cdsproj" Type="C#" />
+  <Project Path="albx_TestSolutionMatrix_NoGit_NoBuildVersion/albx_TestSolutionMatrix_NoGit_NoBuildVersion.cdsproj" Type="C#" />
+  <Project Path="albx_TestSolutionMatrix_NoGit_WithBuildVersion/albx_TestSolutionMatrix_NoGit_WithBuildVersion.cdsproj" Type="C#" />
+  <Project Path="albx_TestSolutionOnlyPCF/albx_TestSolutionOnlyPCF.cdsproj" Type="C#" />
+  <Project Path="albx_TestSolutionOnlyPlugins/albx_TestSolutionOnlyPlugins.cdsproj" Type="C#" />
+</Solution>

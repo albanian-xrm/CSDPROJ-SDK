@@ -1,2 +1,2 @@
 ﻿v1.0.15:
- -  - Enabled AccelerateBuildsInVisualStudio and did some minor related improvements.
+ - Enabled AccelerateBuildsInVisualStudio and did some minor related improvements.

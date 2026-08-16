@@ -11,16 +11,13 @@
 		<RepositoryType>git</RepositoryType>
 	    <PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<IncludeDefaultItems>false</IncludeDefaultItems>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="Sdk/**" Pack="true" PackagePath="Sdk" />
-		<Content Include="../Shared.props/NoAssembly.props" Link="Sdk/Shared.props" Pack="true" PackagePath="Sdk/Shared.props/" />
-		<Content Include="../Shared.targets/NoAssembly.targets" Link="Sdk/Shared.targets" Pack="true" PackagePath="Sdk/Shared.targets/" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Logo.png" />
+		<Content Include="../Shared/NoAssembly.props" Link="Sdk/Shared/NoAssembly.props" Pack="true" PackagePath="Sdk/Shared/" />
+		<Content Include="../Shared/NoAssembly.targets" Link="Sdk/Shared/NoAssembly.targets" Pack="true" PackagePath="Sdk/Shared/" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -34,24 +31,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<Version>3.*</Version>
 		</PackageReference>
-  		<PackageReference Include="Microsoft.Build.NoTargets" Version="3.7.56" />
 	</ItemGroup>
 
-	<Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
-		<PropertyGroup>
-			<PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotes.txt"))%0a$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotesArchive.txt"))</PackageReleaseNotes>
-		</PropertyGroup>
-	</Target>
-
-	<Target Name="Update_TestProject_References" AfterTargets="Pack">
-		<ItemGroup>
-			<_TestProject Include="../AlbanianXrm.CDSProj.Sdk.Tests/**/*.cdsproj" />
-		</ItemGroup>
-		<XmlPoke
-			XmlInputPath="%(_TestProject.Identity)"
-			Query="Project/@Sdk"
-			Value="AlbanianXrm.CDSProj.Sdk/$(Version)"
-		/>
-		<Message Text="Set AlbanianXrm.CDSProj.Sdk version to $(Version) for %(_TestProject.Identity)" Importance="high" />
-	</Target>
+	<Import Project="../Shared/LocalNugetPackageCacheForTests.targets" />
+	<Import Project="../Shared/PreparePackageReleaseNotesFromFile.targets" />
+	<Import Project="../Shared/UpdateTestProjectReferences.targets" />
 </Project>

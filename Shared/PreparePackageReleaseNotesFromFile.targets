@@ -1,0 +1,23 @@
+<Project>
+    <PropertyGroup>
+        <PackageReleaseNotesFile>$(BaseIntermediateOutputPath)/PackageReleaseNotes.txt</PackageReleaseNotesFile>
+    </PropertyGroup>
+
+	<Target 
+        BeforeTargets="GenerateNuspec"
+        Inputs="$(MSBuildProjectDirectory)/ReleaseNotes.txt;$(MSBuildProjectDirectory)/ReleaseNotesArchive.txt"
+        Name="PreparePackageReleaseNotesFromFile"
+        Outputs="$(PackageReleaseNotesFile)"
+    >
+		<PropertyGroup>
+			<PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotes.txt"))%0a$</PackageReleaseNotes>
+            <PackageReleaseNotes>$(PackageReleaseNotes)$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/ReleaseNotesArchive.txt"))</PackageReleaseNotes>
+        </PropertyGroup>
+
+        <WriteLinesToFile
+            File="$(PackageReleaseNotesFile)"
+            Lines="$(PackageReleaseNotes)"
+            Overwrite="true"
+        />
+	</Target>
+</Project>
